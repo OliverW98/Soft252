@@ -17,7 +17,16 @@ public class Patient extends HospitalPerson {
     private String medicine = "";
     private Integer quantity = null;
     private String dosage = "";
-
+/**
+    public void patient(String name , String surname , String address , String id, Integer age , String gender){
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.id = id;
+        this.age = age;
+        this.gender = gender;
+    }
+    */
     public Integer getAge() {
         return age;
     }

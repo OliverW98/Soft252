@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package soft252cw;
-
 /**
  *
  * @author Oliver
@@ -16,6 +15,15 @@ public class SOFT252CW {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        
+        Patient patient1 = new Patient();
+        
+        Doctor Doctor1 = new Doctor();
+        
+        Doctor1.prescribeMedicine(patient1);
     }
+
+
     
 }

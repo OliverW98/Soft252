@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package soft252cw;
-
 /**
  *
  * @author Oliver
  */
 public class Doctor {
- 
+
     
     public void viewAppointments(){
         
@@ -28,11 +27,14 @@ public class Doctor {
         
     }
     
-    public void prescribeMedicine(){
+    public void prescribeMedicine(Patient patient){
+        
+        this.patient.getGender();
         
     }
     
     public void createMedicines(){
                
     }
+
 }

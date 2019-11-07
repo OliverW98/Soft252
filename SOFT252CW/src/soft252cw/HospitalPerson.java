@@ -11,11 +11,10 @@ package soft252cw;
  */
 public class HospitalPerson {
     
-    private String name = "";
-    private String surename = "";
-    private String Address = "";
-    private String Postcode ="";
-    private String ID = "";
+    protected String name = "";
+    protected String surname = "";
+    protected String address = "";
+    protected String id = "";
 
     public String getName() {
         return name;
@@ -25,36 +24,28 @@ public class HospitalPerson {
         this.name = name;
     }
 
-    public String getSurename() {
-        return surename;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurename(String surename) {
-        this.surename = surename;
+    public void setSurename(String surname) {
+        this.surname = surname;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
-    }
-
-    public String getPostcode() {
-        return Postcode;
-    }
-
-    public void setPostcode(String Postcode) {
-        this.Postcode = Postcode;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getID() {
-        return ID;
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setID(String id) {
+        this.id = id;
     }
     
 }
