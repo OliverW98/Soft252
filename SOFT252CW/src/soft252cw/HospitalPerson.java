@@ -10,11 +10,22 @@ package soft252cw;
  * @author Oliver
  */
 public class HospitalPerson {
-    
-    protected String name = "";
-    protected String surname = "";
-    protected String address = "";
-    protected String id = "";
+
+    protected String name;
+    protected String surname;
+    protected String address;
+    protected String id;
+
+    public HospitalPerson(String name, String surname, String address, String id) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.id = id;
+    }
+
+    public HospitalPerson() {
+        this("", "", "", "");
+    }
 
     public String getName() {
         return name;
@@ -47,5 +58,5 @@ public class HospitalPerson {
     public void setID(String id) {
         this.id = id;
     }
-    
+
 }

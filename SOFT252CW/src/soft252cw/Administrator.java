@@ -11,9 +11,11 @@ package soft252cw;
  */
 public class Administrator extends HospitalPerson {
     
-    
+    /**
+     * Generate new Ids for accounts
+     */
    public void CreateAccount(){
-        
+
    }
    
    public void addDoctorAccount(){
@@ -39,5 +41,4 @@ public class Administrator extends HospitalPerson {
    public void ProvideFeebackToDoctor(){
        
    }
-   
 }

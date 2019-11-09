@@ -9,7 +9,7 @@ package soft252cw;
  *
  * @author Oliver
  */
-public class Secretary {
+public class Secretary extends HospitalPerson {
     
     
     public void approvePatientAccount(){

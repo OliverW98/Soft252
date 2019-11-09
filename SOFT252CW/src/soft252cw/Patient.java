@@ -5,28 +5,39 @@
  */
 package soft252cw;
 
+import java.util.Objects;
+
 /**
  *
  * @author Oliver
  */
 public class Patient extends HospitalPerson {
-    
-    private Integer age = null;
-    private String gender = "";
-    private String notes = "";
-    private String medicine = "";
-    private Integer quantity = null;
-    private String dosage = "";
-/**
-    public void patient(String name , String surname , String address , String id, Integer age , String gender){
-        this.name = name;
-        this.surname = surname;
-        this.address = address;
-        this.id = id;
+
+    private int age;
+    private String gender;
+    private String notes;
+    private String medicine;
+    private int quantity;
+    private String dosage;
+
+ 
+    public Patient(int age, String gender, String notes, String medicine, int quantity, String dosage) {
         this.age = age;
         this.gender = gender;
+        this.notes = notes;
+        this.medicine = medicine;
+        this.quantity = quantity;
+        this.dosage = dosage;
     }
-    */
+
+    public Patient(int age) {
+        this(age, "", "", "", 0, "");
+    }
+    
+    public Patient() {
+        this(0, "", "", "", 0, "");
+    }
+
     public Integer getAge() {
         return age;
     }
@@ -74,41 +85,70 @@ public class Patient extends HospitalPerson {
     public void setDosage(String dosage) {
         this.dosage = dosage;
     }
-      
-   
-    public void requestCreateAccount(){
-          
+
+    public void requestCreateAccount() {
+
+    }
+
+    public void rateDoctor(String review) {
+
+    }
+
+    public void feedbackMessage() {
+
+    }
+
+    public void viewDoctorRatings() {
+
+    }
+
+    public void requestAppointment() {
+
+    }
+
+    public void viewHistory() {
+
+    }
+
+    public void viewAppointmet() {
+
+    }
+
+    public void viewPrescription() {
+
+    }
+
+    public void requestAccountTermination() {
+
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Patient other = (Patient) obj;
+        if (!this.id.equals(other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" + "age=" + age + ", gender=" + gender + ", notes=" + notes + ", medicine=" + medicine + ", quantity=" + quantity + ", dosage=" + dosage + '}';
     }
       
-    public void rateDoctor(){
-        
-    }
-    
-    public void feedbackMessage(){
-        
-    }
-    
-    public void viewDoctorRatings(){
-        
-    }
-    
-    public void requestAppointment(){
-        
-    }
-    
-    public void viewHistory(){
-        
-    }
-    
-    public void viewAppointmet(){
-        
-    }
-    
-    public void viewPrescription(){
-        
-    }
-    
-    public void requestAccountTermination(){
-        
-    }
 }

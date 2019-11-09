@@ -8,9 +8,11 @@ package soft252cw;
  *
  * @author Oliver
  */
-public class Doctor {
+public class Doctor extends HospitalPerson {
 
-    
+
+
+
     public void viewAppointments(){
         
     }
@@ -29,7 +31,7 @@ public class Doctor {
     
     public void prescribeMedicine(Patient patient){
         
-        this.patient.getGender();
+        patient.setMedicine("cocaine");
         
     }
     
