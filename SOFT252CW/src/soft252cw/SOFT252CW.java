@@ -17,11 +17,8 @@ public class SOFT252CW {
         // TODO code application logic here
         
         
-        Patient patient1 = new Patient(10);
-        Patient patient2 = new Patient(12);
-        
-        System.out.println(patient1.equals(patient2));
-        
+        Patient patient1 = new Patient();
+
         Doctor Doctor1 = new Doctor();
         
         Doctor1.prescribeMedicine(patient1);

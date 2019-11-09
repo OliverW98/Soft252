@@ -6,10 +6,15 @@
 
 package soft252cw;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Oliver
  */
 public class Hospital {
+
+ArrayList<HospitalPerson> people = new ArrayList<HospitalPerson>();
+
 
 }

@@ -5,8 +5,6 @@
  */
 package soft252cw;
 
-import java.util.Objects;
-
 /**
  *
  * @author Oliver
@@ -16,33 +14,38 @@ public class Patient extends HospitalPerson {
     private int age;
     private String gender;
     private String notes;
-    private String medicine;
-    private int quantity;
-    private String dosage;
+    private Prescription prescription;
 
+    public Patient() {
+    }
+    
+    public Patient(String name, String surname, String address, String id, int age, String gender) {
+        super(name, surname, address, id);
+        this.age = age;
+        this.gender = gender;
+    }
  
-    public Patient(int age, String gender, String notes, String medicine, int quantity, String dosage) {
+    public Patient(int age, String gender, String notes, Prescription prescription) {
         this.age = age;
         this.gender = gender;
         this.notes = notes;
-        this.medicine = medicine;
-        this.quantity = quantity;
-        this.dosage = dosage;
+        this.prescription = prescription;
     }
 
-    public Patient(int age) {
-        this(age, "", "", "", 0, "");
-    }
-    
-    public Patient() {
-        this(0, "", "", "", 0, "");
+    public Patient(int age, String gender, String notes, Prescription prescription, String name, String surname, String address, String id) {
+        super(name, surname, address, id);
+        this.age = age;
+        this.gender = gender;
+        this.notes = notes;
+        this.prescription = prescription;
     }
 
-    public Integer getAge() {
+
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -62,28 +65,12 @@ public class Patient extends HospitalPerson {
         this.notes = notes;
     }
 
-    public String getMedicine() {
-        return medicine;
+    public Prescription getPrescription() {
+        return prescription;
     }
 
-    public void setMedicine(String medicine) {
-        this.medicine = medicine;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
     }
 
     public void requestCreateAccount() {
@@ -148,7 +135,8 @@ public class Patient extends HospitalPerson {
 
     @Override
     public String toString() {
-        return "Patient{" + "age=" + age + ", gender=" + gender + ", notes=" + notes + ", medicine=" + medicine + ", quantity=" + quantity + ", dosage=" + dosage + '}';
+        return "Patient{" + "age=" + age + ", gender=" + gender + ", notes=" + notes + ", prescription=" + prescription + '}';
     }
+
       
 }

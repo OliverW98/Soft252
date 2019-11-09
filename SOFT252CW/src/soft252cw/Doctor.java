@@ -31,8 +31,9 @@ public class Doctor extends HospitalPerson {
     
     public void prescribeMedicine(Patient patient){
         
-        patient.setMedicine("cocaine");
-        
+        Prescription prescription = new Prescription("coke" , 10 , "all day long");
+              
+        patient.setPrescription(prescription);
     }
     
     public void createMedicines(){
