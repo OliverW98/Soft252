@@ -19,8 +19,8 @@ public class Patient extends HospitalPerson {
     public Patient() {
     }
     
-    public Patient(String name, String surname, String address, String id, int age, String gender) {
-        super(name, surname, address, id);
+    public Patient(String name, String surname, String address, String id, int age, String gender,String password) {
+        super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
     }
@@ -32,8 +32,8 @@ public class Patient extends HospitalPerson {
         this.prescription = prescription;
     }
 
-    public Patient(int age, String gender, String notes, Prescription prescription, String name, String surname, String address, String id) {
-        super(name, surname, address, id);
+    public Patient(int age, String gender, String notes, Prescription prescription, String name, String surname, String address, String id ,String password) {
+        super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
         this.notes = notes;

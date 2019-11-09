@@ -16,5 +16,4 @@ public class Hospital {
 
 ArrayList<HospitalPerson> people = new ArrayList<HospitalPerson>();
 
-
 }

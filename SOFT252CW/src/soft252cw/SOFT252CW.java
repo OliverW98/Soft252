@@ -16,7 +16,6 @@ public class SOFT252CW {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        
         Patient patient1 = new Patient();
 
         Doctor Doctor1 = new Doctor();

@@ -15,16 +15,18 @@ public class HospitalPerson {
     protected String surname;
     protected String address;
     protected String id;
+    protected String password;
 
-    public HospitalPerson(String name, String surname, String address, String id) {
+    public HospitalPerson(String name, String surname, String address, String id, String password) {
         this.name = name;
         this.surname = surname;
         this.address = address;
         this.id = id;
+        this.password = password;
     }
 
     public HospitalPerson() {
-        this("", "", "", "");
+        this("", "", "", "","");
     }
 
     public String getName() {
