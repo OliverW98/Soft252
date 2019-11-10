@@ -19,7 +19,7 @@ public class Patient extends HospitalPerson {
     public Patient() {
     }
     
-    public Patient(String name, String surname, String address, String id, int age, String gender,String password) {
+    public Patient(String name, String surname, String address, String id, String password, int age, String gender) {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;

@@ -12,9 +12,18 @@ public class Doctor extends HospitalPerson {
 
 
 
+    public Doctor() {
+    }
+    
+    public Doctor(String name, String surname, String address, String id, String password) {
+        super(name, surname, address, id, password);
+    }
 
-    public void viewAppointments(){
-        
+    /**
+     * review and rating. 5 stars?
+     */
+
+    public void viewAppointments() {
     }
     
     public void makeNotes(){
