@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Hospital {
 
-ArrayList<HospitalPerson> people;
+ArrayList<HospitalPerson> people = new ArrayList<>();
 
 
     public Hospital() {
@@ -25,7 +25,7 @@ ArrayList<HospitalPerson> people;
         Secretary secretary = new Secretary("oscar","reid","16 Lorrimore Ave, Plymouth PL2 1HZ","S4992","password"); 
         Doctor doctor1 = new Doctor("hilda","owen","19 Baring St, Plymouth PL4 8NF","D0063","password");
         Doctor doctor2 = new Doctor("benjamin","farrell","9 Congreve Gardens, Plymouth PL5 3HG","D5453","password");
-        Doctor doctor3 = new Doctor("david","standley","35 Dale Gardens, Plymouth PL4 6PY","P9974","password");
+        Doctor doctor3 = new Doctor("david","standley","35 Dale Gardens, Plymouth PL4 6PY","D9974","password");
         Patient patient1 = new Patient("ian","smith","19 Effingham Cres, Plymouth PL3 5TN","P5433" ,"qwerty",25,"male");
         Patient patient2 = new Patient("stacy","johnson","3 Baytree Gardens, Plymouth PL2 2QQ","P8253" ,"password",62,"female");
         Patient patient3 = new Patient("charlotte","wood","1 Swale Cl, Plymouth PL3 6NY","P0824","logmein",33,"female");
@@ -37,7 +37,7 @@ ArrayList<HospitalPerson> people;
         people.add(patient1);
         people.add(patient2);
         people.add(patient3);
-   
+
     }
 
 

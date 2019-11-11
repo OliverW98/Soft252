@@ -14,8 +14,11 @@ public class LogIn extends javax.swing.JFrame {
     /**
      * Creates new form LogIn
      */
+    private Hospital hospital = new Hospital();
+    
     public LogIn() {
         initComponents();
+        lblOutput.setText("");
     }
 
     /**
@@ -33,10 +36,16 @@ public class LogIn extends javax.swing.JFrame {
         txtUniqueID = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
+        lblOutput = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnRequestAccount.setText("Request Account");
         btnRequestAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -50,6 +59,8 @@ public class LogIn extends javax.swing.JFrame {
 
         lblPassword.setText("Password :");
         lblPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        lblOutput.setText("output");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,13 +77,14 @@ public class LogIn extends javax.swing.JFrame {
                                 .addComponent(btnLogin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRequestAccount))
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblOutput)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblUniqueID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUniqueID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +101,9 @@ public class LogIn extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnRequestAccount))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblOutput)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,6 +113,31 @@ public class LogIn extends javax.swing.JFrame {
         this.setVisible(false);
         new RequestAccountCreation().setVisible(true);
     }//GEN-LAST:event_btnRequestAccountActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        hospital.people.forEach((_item) -> {
+        if(_item.getID().substring(0, 1).equals("A") && 
+                txtUniqueID.getText().equals(_item.getID()) && 
+                txtUniqueID.getText().equals(_item.getPassword())){
+            // go to page  
+        } else if(_item.getID().substring(0, 1).equals("S") && 
+                txtUniqueID.getText().equals(_item.getID()) && 
+                txtUniqueID.getText().equals(_item.getPassword())){
+            // go to page
+        }  else if(_item.getID().substring(0, 1).equals("D") && 
+                txtUniqueID.getText().equals(_item.getID()) && 
+                txtUniqueID.getText().equals(_item.getPassword())){
+            // go to page
+        }   else if(_item.getID().substring(0, 1).equals("P") && 
+                txtUniqueID.getText().equals(_item.getID()) && 
+                txtUniqueID.getText().equals(_item.getPassword())){
+            // go to page
+        }   else {
+            lblOutput.setText("Please Enter Vaild ID and Password");
+        }
+        });  
+
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +177,7 @@ public class LogIn extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRequestAccount;
+    private javax.swing.JLabel lblOutput;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUniqueID;
     private javax.swing.JTextField txtPassword;
