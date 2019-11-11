@@ -35,8 +35,8 @@ public class LogIn extends javax.swing.JFrame {
         lblUniqueID = new javax.swing.JLabel();
         txtUniqueID = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         lblOutput = new javax.swing.JLabel();
+        pfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +62,8 @@ public class LogIn extends javax.swing.JFrame {
 
         lblOutput.setText("output");
 
+        pfPassword.setText("jPasswordField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,14 +79,14 @@ public class LogIn extends javax.swing.JFrame {
                                 .addComponent(btnLogin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRequestAccount))
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblOutput)))
+                            .addComponent(lblOutput)
+                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblUniqueID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUniqueID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +98,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
@@ -118,19 +120,19 @@ public class LogIn extends javax.swing.JFrame {
         hospital.people.forEach((_item) -> {
         if(_item.getID().substring(0, 1).equals("A") && 
                 txtUniqueID.getText().equals(_item.getID()) && 
-                txtUniqueID.getText().equals(_item.getPassword())){
+                pfPassword.getPassword().equals(_item.getPassword())){
             // go to page  
         } else if(_item.getID().substring(0, 1).equals("S") && 
                 txtUniqueID.getText().equals(_item.getID()) && 
-                txtUniqueID.getText().equals(_item.getPassword())){
+                pfPassword.getPassword().equals(_item.getPassword())){
             // go to page
         }  else if(_item.getID().substring(0, 1).equals("D") && 
                 txtUniqueID.getText().equals(_item.getID()) && 
-                txtUniqueID.getText().equals(_item.getPassword())){
+                pfPassword.getPassword().equals(_item.getPassword())){
             // go to page
         }   else if(_item.getID().substring(0, 1).equals("P") && 
                 txtUniqueID.getText().equals(_item.getID()) && 
-                txtUniqueID.getText().equals(_item.getPassword())){
+                pfPassword.getPassword().equals(_item.getPassword())){
             // go to page
         }   else {
             lblOutput.setText("Please Enter Vaild ID and Password");
@@ -180,7 +182,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel lblOutput;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUniqueID;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JTextField txtUniqueID;
     // End of variables declaration//GEN-END:variables
 }

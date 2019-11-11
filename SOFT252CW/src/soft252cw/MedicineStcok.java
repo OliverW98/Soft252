@@ -16,16 +16,16 @@ public class MedicineStcok {
 
     public MedicineStcok() {
         
-        Medicine med1 = new Medicine("",10);
-        Medicine med2 = new Medicine("",10);
-        Medicine med3 = new Medicine("",10);
-        Medicine med4 = new Medicine("",10);
-        Medicine med5 = new Medicine("",10);
-        Medicine med6 = new Medicine("",10);
-        Medicine med7 = new Medicine("",10);
-        Medicine med8 = new Medicine("",10);
-        Medicine med9 = new Medicine("",10);
-        Medicine med10 = new Medicine("",10);
+        Medicine med1 = new Medicine("name1",10);
+        Medicine med2 = new Medicine("name2",10);
+        Medicine med3 = new Medicine("name3",10);
+        Medicine med4 = new Medicine("name4",10);
+        Medicine med5 = new Medicine("name5",10);
+        Medicine med6 = new Medicine("name6",10);
+        Medicine med7 = new Medicine("name7",10);
+        Medicine med8 = new Medicine("name8",10);
+        Medicine med9 = new Medicine("name9",10);
+        Medicine med10 = new Medicine("name10",10);
         
         medicine.add(med1);
         medicine.add(med2);
