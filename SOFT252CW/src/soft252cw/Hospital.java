@@ -14,10 +14,11 @@ import java.util.ArrayList;
  */
 public class Hospital {
 
-ArrayList<HospitalPerson> people = new ArrayList<>();
+ArrayList<HospitalPerson> people;
 
 
     public Hospital() {
+        people = new ArrayList<>();
         /**
          * Patient(String name, String surname, String address, String id, int age, String gender,String password)
          */
@@ -37,7 +38,6 @@ ArrayList<HospitalPerson> people = new ArrayList<>();
         people.add(patient1);
         people.add(patient2);
         people.add(patient3);
-
     }
 
 

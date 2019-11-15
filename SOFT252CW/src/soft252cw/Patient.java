@@ -5,6 +5,8 @@
  */
 package soft252cw;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Oliver
@@ -15,7 +17,7 @@ public class Patient extends HospitalPerson {
     private String gender;
     private String notes;
     private Prescription prescription;
-    private Appointment[] appointments;
+    ArrayList<Appointment> appointment;
 
     public Patient() {
     }
@@ -24,6 +26,7 @@ public class Patient extends HospitalPerson {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
+        appointment = new ArrayList<>();
     }
  
     public Patient(int age, String gender, String notes, Prescription prescription) {
@@ -31,16 +34,19 @@ public class Patient extends HospitalPerson {
         this.gender = gender;
         this.notes = notes;
         this.prescription = prescription;
+        appointment = new ArrayList<>();
     }
 
-    public Patient(int age, String gender, String notes, Prescription prescription, Appointment[] appointments, String name, String surname, String address, String id, String password) {
+    public Patient(int age, String gender, String notes, Prescription prescription, ArrayList<Appointment> appointment, String name, String surname, String address, String id, String password) {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
         this.notes = notes;
         this.prescription = prescription;
-        this.appointments = appointments;
+        appointment = new ArrayList<>();
+        this.appointment = appointment;
     }
+
 
     public int getAge() {
         return age;
@@ -73,6 +79,18 @@ public class Patient extends HospitalPerson {
     public void setPrescription(Prescription prescription) {
         this.prescription = prescription;
     }
+
+    public ArrayList<Appointment> getAppointment() {
+        return appointment;
+    }
+    
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment.add(appointment);
+    }
+
+
+    
 
     public void requestCreateAccount() {
 
@@ -137,6 +155,10 @@ public class Patient extends HospitalPerson {
     @Override
     public String toString() {
         return "Patient{" + "age=" + age + ", gender=" + gender + ", notes=" + notes + ", prescription=" + prescription + '}';
+    }
+
+    Object append() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
       

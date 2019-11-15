@@ -14,7 +14,8 @@ public class LogIn extends javax.swing.JFrame {
     /**
      * Creates new form LogIn
      */
-    private Hospital hospital = new Hospital();
+    
+    Hospital hospital = new Hospital();
     
     public LogIn() {
         initComponents();
@@ -36,7 +37,7 @@ public class LogIn extends javax.swing.JFrame {
         txtUniqueID = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
         lblOutput = new javax.swing.JLabel();
-        pfPassword = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,8 +63,6 @@ public class LogIn extends javax.swing.JFrame {
 
         lblOutput.setText("output");
 
-        pfPassword.setText("jPasswordField1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,13 +79,13 @@ public class LogIn extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRequestAccount))
                             .addComponent(lblOutput)
-                            .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblUniqueID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtUniqueID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +97,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
@@ -113,31 +112,29 @@ public class LogIn extends javax.swing.JFrame {
 
     private void btnRequestAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAccountActionPerformed
         this.setVisible(false);
-        new RequestAccountCreation().setVisible(true);
+        new RequestAccountCreation().setVisible(true);  
     }//GEN-LAST:event_btnRequestAccountActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         hospital.people.forEach((_item) -> {
-        if(_item.getID().substring(0, 1).equals("A") && 
-                txtUniqueID.getText().equals(_item.getID()) && 
-                pfPassword.getPassword().equals(_item.getPassword())){
+            
+             boolean uniqueid =  txtUniqueID.getText().equals(_item.getID());
+             boolean password = txtPassword.getText().equals(_item.getPassword());
+                    
+        if(_item.getID().substring(0, 1).equals("A") &&uniqueid == true && password == true){
             // go to page  
-        } else if(_item.getID().substring(0, 1).equals("S") && 
-                txtUniqueID.getText().equals(_item.getID()) && 
-                pfPassword.getPassword().equals(_item.getPassword())){
+        } else if(_item.getID().substring(0, 1).equals("S") && uniqueid == true && password == true){
             // go to page
-        }  else if(_item.getID().substring(0, 1).equals("D") && 
-                txtUniqueID.getText().equals(_item.getID()) && 
-                pfPassword.getPassword().equals(_item.getPassword())){
+        }  else if(_item.getID().substring(0, 1).equals("D") && uniqueid == true && password == true){
             // go to page
-        }   else if(_item.getID().substring(0, 1).equals("P") && 
-                txtUniqueID.getText().equals(_item.getID()) && 
-                pfPassword.getPassword().equals(_item.getPassword())){
-            // go to page
+        }   else if(_item.getID().substring(0, 1).equals("P") && uniqueid == true &&password == true){
+            PatientHome tempPatientHome = new PatientHome((Patient)_item);
+            tempPatientHome.setVisible(true);
+            tempPatientHome.displayPatientsAppointments();
         }   else {
-            lblOutput.setText("Please Enter Vaild ID and Password");
+            lblOutput.setText("Please Enter Vaild ID and Password");     
         }
-        });  
+        });
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -182,7 +179,7 @@ public class LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel lblOutput;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUniqueID;
-    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUniqueID;
     // End of variables declaration//GEN-END:variables
 }
