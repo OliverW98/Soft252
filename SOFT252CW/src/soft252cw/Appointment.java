@@ -5,36 +5,29 @@
  */
 package soft252cw;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author Oliver
  */
 public class Appointment {
     
-    private String date;
-    private String time;
+    private Date date;
     private String doctorName;
 
-    public Appointment(String date, String time, String doctorName) {
+    public Appointment(Date date, String doctorName) {
         this.date = date;
-        this.time = time;
         this.doctorName = doctorName;
     }
 
-    public String getDate() {
+    public Date getDate() {    
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getDoctorName() {

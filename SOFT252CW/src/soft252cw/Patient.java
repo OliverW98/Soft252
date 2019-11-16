@@ -26,7 +26,10 @@ public class Patient extends HospitalPerson {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
-        appointment = new ArrayList<>();
+        this.notes ="";
+        Prescription pre = new Prescription("",0,"");
+        this.prescription = pre;
+        this.appointment = new ArrayList<>();
     }
  
     public Patient(int age, String gender, String notes, Prescription prescription) {
@@ -34,7 +37,7 @@ public class Patient extends HospitalPerson {
         this.gender = gender;
         this.notes = notes;
         this.prescription = prescription;
-        appointment = new ArrayList<>();
+        this.appointment = new ArrayList<>();
     }
 
     public Patient(int age, String gender, String notes, Prescription prescription, ArrayList<Appointment> appointment, String name, String surname, String address, String id, String password) {
@@ -43,7 +46,7 @@ public class Patient extends HospitalPerson {
         this.gender = gender;
         this.notes = notes;
         this.prescription = prescription;
-        appointment = new ArrayList<>();
+        this.appointment = new ArrayList<>();
         this.appointment = appointment;
     }
 
@@ -96,31 +99,7 @@ public class Patient extends HospitalPerson {
 
     }
 
-    public void rateDoctor(String review) {
-
-    }
-
-    public void feedbackMessage() {
-
-    }
-
-    public void viewDoctorRatings() {
-
-    }
-
     public void requestAppointment() {
-
-    }
-
-    public void viewHistory() {
-
-    }
-
-    public void viewAppointmet() {
-
-    }
-
-    public void viewPrescription() {
 
     }
 
