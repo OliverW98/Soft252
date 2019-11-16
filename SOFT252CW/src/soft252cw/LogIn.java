@@ -128,9 +128,9 @@ public class LogIn extends javax.swing.JFrame {
         }  else if(_item.getID().substring(0, 1).equals("D") && uniqueid == true && password == true){
             // go to page
         }   else if(_item.getID().substring(0, 1).equals("P") && uniqueid == true &&password == true){
-            PatientHome tempPatientHome = new PatientHome((Patient)_item);
+            PatientHome tempPatientHome = new PatientHome((Patient)_item, hospital);
             tempPatientHome.setVisible(true);
-            tempPatientHome.displayPatientsAppointments();
+            tempPatientHome.onLoad();
         }   else {
             lblOutput.setText("Please Enter Vaild ID and Password");     
         }

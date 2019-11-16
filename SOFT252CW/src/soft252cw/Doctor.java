@@ -4,24 +4,33 @@
  * and open the template in the editor.
  */
 package soft252cw;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author Oliver
  */
 public class Doctor extends HospitalPerson {
 
-
+    private ArrayList<Review> review;
 
     public Doctor() {
     }
     
     public Doctor(String name, String surname, String address, String id, String password) {
         super(name, surname, address, id, password);
+        review = new ArrayList<>();
     }
 
-    /**
-     * review and rating. 5 stars?
-     */
+    public ArrayList<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review.add(review);
+    }
+
 
     public void viewAppointments() {
     }
