@@ -15,11 +15,12 @@ public class LogIn extends javax.swing.JFrame {
      * Creates new form LogIn
      */
     
-    Hospital hospital = new Hospital();
+    Hospital hospital;
     
     public LogIn() {
         initComponents();
         lblOutput.setText("");
+        hospital = new Hospital();
     }
 
     /**
@@ -122,7 +123,10 @@ public class LogIn extends javax.swing.JFrame {
              boolean password = txtPassword.getText().equals(_item.getPassword());
                     
         if(_item.getID().substring(0, 1).equals("A") &&uniqueid == true && password == true){
-            // go to page  
+            AdministratorHome tempAdministratorHome = new AdministratorHome((Administrator)_item, hospital);
+            tempAdministratorHome.setVisible(true);
+            tempAdministratorHome.onLoad();
+           // tempAdministratorHome.onLoad();
         } else if(_item.getID().substring(0, 1).equals("S") && uniqueid == true && password == true){
             // go to page
         }  else if(_item.getID().substring(0, 1).equals("D") && uniqueid == true && password == true){
@@ -138,6 +142,10 @@ public class LogIn extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    public void updateHospital(Hospital hospital){
+        this.hospital = hospital;
+    }
+    
     /**
      * @param args the command line arguments
      */
