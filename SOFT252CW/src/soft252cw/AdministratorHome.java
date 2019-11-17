@@ -7,7 +7,6 @@ package soft252cw;
 
 import java.util.Random;
 
-
 /**
  *
  * @author Oliver
@@ -19,7 +18,8 @@ public class AdministratorHome extends javax.swing.JFrame {
      */
     private Administrator currentAdmin;
     private Hospital hospital;
-    
+    private Doctor currentDoctor;
+
     public AdministratorHome(Administrator admin, Hospital hospital) {
         initComponents();
         this.currentAdmin = admin;
@@ -39,6 +39,10 @@ public class AdministratorHome extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        cbSelectDoctor = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaDoctorReviews = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,15 +71,44 @@ public class AdministratorHome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel11.setText("Select Doctor :");
+
+        cbSelectDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSelectDoctorActionPerformed(evt);
+            }
+        });
+
+        txtAreaDoctorReviews.setColumns(20);
+        txtAreaDoctorReviews.setRows(5);
+        jScrollPane1.setViewportView(txtAreaDoctorReviews);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Doctor Feedback", jPanel2);
@@ -106,9 +139,9 @@ public class AdministratorHome extends javax.swing.JFrame {
         jLabel8.setText("Remove Doctor / Secretary");
 
         cbRemoveOccupation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doctor", "Secretary" }));
-        cbRemoveOccupation.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbRemoveOccupationItemStateChanged(evt);
+        cbRemoveOccupation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRemoveOccupationActionPerformed(evt);
             }
         });
 
@@ -232,51 +265,63 @@ public class AdministratorHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void onLoad(){
+    public void onLoad() {
+        Doctor doc;
+        Review review = new Review("ihfhgfhdfg", 2);
+        doc = (Doctor) hospital.people.get(2);
+        doc.setReview(review);
         lblAddOutput.setText("");
         lblRemoveOutput.setText("");
         populateCBs();
+        displayDoctorReviews();
     }
-    
-    
+
+
     private void btnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonActionPerformed
         Random rand = new Random();
-        String id = String.format("%04d%n", rand.nextInt(10000));   
-        
+        String id = String.format("%04d%n", rand.nextInt(10000));
+
         if (cbAddOccupation.getSelectedItem().equals("Doctor") && !"".equals(txtName.getText()) && !"".equals(txtSurname.getText())
                 && !"".equals(txtAddress.getText()) && !"".equals(txtPassword.getText())) {
             Doctor doctor = new Doctor(txtName.getText(), txtSurname.getText(), txtAddress.getText(),
-                     "D" + id, txtPassword.getText());
+                    "D" + id, txtPassword.getText());
             hospital.people.add(doctor);
-            lblAddOutput.setText(txtName.getText()+" "+ txtSurname.getText()+" was added to the system as a Doctor.");
+            lblAddOutput.setText(txtName.getText() + " " + txtSurname.getText() + " was added to the system as a Doctor.");
         } else if (cbAddOccupation.getSelectedItem().equals("Secretary") && !"".equals(txtName.getText()) && !"".equals(txtSurname.getText())
                 && !"".equals(txtAddress.getText()) && !"".equals(txtPassword.getText())) {
             Secretary secretary = new Secretary(txtName.getText(), txtSurname.getText(), txtAddress.getText(),
-                     "S" + id, txtPassword.getText());
+                    "S" + id, txtPassword.getText());
             hospital.people.add(secretary);
-            lblAddOutput.setText(txtName.getText()+" "+ txtSurname.getText()+" was added as a Secretary.");
-        }else{
+            lblAddOutput.setText(txtName.getText() + " " + txtSurname.getText() + " was added as a Secretary.");
+        } else {
             lblAddOutput.setText("Please fill in TextBoxes");
-        }   
+        }
         populateCBs();
-       // LogIn.updateHospital(this.hospital);
+        // LogIn.updateHospital(this.hospital);
     }//GEN-LAST:event_btnAddPersonActionPerformed
 
-    public void populateCBs(){
+    public void populateCBs() {
         cbRemovePerson.removeAllItems();
-        String IDletter = (String) cbRemoveOccupation.getSelectedItem();
-        hospital.people.forEach((_item) -> {
-            if (_item.getID().substring(0, 1).equals(IDletter.substring(0,1))) {
-                cbRemovePerson.addItem(_item.getName() + " " + _item.getSurname());              
+        cbSelectDoctor.removeAllItems();
+        char IDletter = cbRemoveOccupation.getSelectedItem().toString().charAt(0);
+
+        for (HospitalPerson person : hospital.people) {
+            System.out.println("ID: " + person.getID());
+            if (person.getID().charAt(0) == IDletter) {
+                cbRemovePerson.addItem(person.getName() + " " + person.getSurname());
             }
-        });
+            if (person.getID().charAt(0) == 'D') {
+                cbSelectDoctor.addItem(person.getName() + " " + person.getSurname());
+            }
+        }
+
     }
-    
+
     private void btnRemovePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovePersonActionPerformed
         String selectedPerson = (String) cbRemovePerson.getSelectedItem();
-        
-        for(int i=0; i<hospital.people.size();i++){
-            if (selectedPerson.equals(hospital.people.get(i).getName()+" "+hospital.people.get(i).getSurname())) {
+
+        for (int i = 0; i < hospital.people.size(); i++) {
+            if (selectedPerson.equals(hospital.people.get(i).getName() + " " + hospital.people.get(i).getSurname())) {
                 hospital.people.remove(i);
             }
         }
@@ -284,10 +329,44 @@ public class AdministratorHome extends javax.swing.JFrame {
         lblRemoveOutput.setText(selectedPerson + " has been removed.");
     }//GEN-LAST:event_btnRemovePersonActionPerformed
 
-    private void cbRemoveOccupationItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbRemoveOccupationItemStateChanged
-        populateCBs();
-    }//GEN-LAST:event_cbRemoveOccupationItemStateChanged
+    private void cbSelectDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectDoctorActionPerformed
+        if (cbSelectDoctor.getSelectedItem() == null) {
+            System.out.println("oopsie");
+        } else {
+            displayDoctorReviews();
+        }
+    }//GEN-LAST:event_cbSelectDoctorActionPerformed
 
+    private void cbRemoveOccupationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRemoveOccupationActionPerformed
+        populateCBs();
+    }//GEN-LAST:event_cbRemoveOccupationActionPerformed
+
+    public void displayDoctorReviews() {
+        txtAreaDoctorReviews.setText("");
+        
+        getCurrentDoctor(cbSelectDoctor.getSelectedItem().toString());
+
+        for (int i = 0; i < currentDoctor.getReview().size(); i++) {
+            txtAreaDoctorReviews.append(currentDoctor.getName() + " " + currentDoctor.getSurname() + " was given "
+                    + currentDoctor.getReview().get(i).getRating() + "/5 stars : "
+                    + currentDoctor.getReview().get(i).getReview() + "\n");
+        }
+    }
+
+    public void getCurrentDoctor(String selectedDoctor) {
+        String DoctorName = selectedDoctor;
+
+        hospital.people.forEach((_item) -> {
+
+            boolean nameTest = DoctorName.equals(_item.getName() + " " + _item.getSurname());
+
+            if (nameTest == true) {
+
+                currentDoctor = (Doctor) _item;
+
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -298,8 +377,10 @@ public class AdministratorHome extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAddOccupation;
     private javax.swing.JComboBox<String> cbRemoveOccupation;
     private javax.swing.JComboBox<String> cbRemovePerson;
+    private javax.swing.JComboBox<String> cbSelectDoctor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -310,11 +391,13 @@ public class AdministratorHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblAddOutput;
     private javax.swing.JLabel lblRemoveOutput;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextArea txtAreaDoctorReviews;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtSurname;

@@ -7,6 +7,7 @@
 package soft252cw;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Hospital {
 
-ArrayList<HospitalPerson> people;
+public ArrayList<HospitalPerson> people;
 
 
     public Hospital() {
