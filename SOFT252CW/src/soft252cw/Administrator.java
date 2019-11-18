@@ -24,26 +24,6 @@ public class Administrator extends HospitalPerson {
 
    }
    
-   public void addDoctorAccount(){
-       
-   }
-   
-   public void removeDoctorAccount(){
-       
-   }
-   
-   public void addSecetaryAccount(){
-       
-   }
-   
-   public void removeSecetaryAccount(){
-       
-   }
-   
-   public void viewDoctorRatings(){
-       
-   }
-   
    public void ProvideFeebackToDoctor(){
        
    }

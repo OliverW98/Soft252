@@ -18,6 +18,8 @@ public class SOFT252CW {
         // TODO code application logic here
         
         new LogIn().setVisible(true);
+        
+        Patient patient = new Patient();
                 
     }
     

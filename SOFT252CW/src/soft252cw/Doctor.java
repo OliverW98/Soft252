@@ -32,9 +32,6 @@ public class Doctor extends HospitalPerson {
     }
 
 
-    public void viewAppointments() {
-    }
-    
     public void makeNotes(){
         
     }

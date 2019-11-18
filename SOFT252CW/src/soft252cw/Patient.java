@@ -18,38 +18,25 @@ public class Patient extends HospitalPerson {
     private String notes;
     private Prescription prescription;
     ArrayList<Appointment> appointment;
+    private boolean approved;
 
     public Patient() {
     }
-    
-    public Patient(String name, String surname, String address, String id, String password, int age, String gender) {
+
+    public Patient(String name, String surname, String address, String id, String password, int age, String gender, boolean approved) {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
-        this.notes ="";
-        Prescription pre = new Prescription("",0,"");
+        this.notes = "";
+        Prescription pre = new Prescription("", 0, "");
         this.prescription = pre;
         this.appointment = new ArrayList<>();
-    }
- 
-    public Patient(int age, String gender, String notes, Prescription prescription) {
-        this.age = age;
-        this.gender = gender;
-        this.notes = notes;
-        this.prescription = prescription;
-        this.appointment = new ArrayList<>();
+        this.approved = approved;
     }
 
-    public Patient(int age, String gender, String notes, Prescription prescription, ArrayList<Appointment> appointment, String name, String surname, String address, String id, String password) {
-        super(name, surname, address, id, password);
-        this.age = age;
-        this.gender = gender;
-        this.notes = notes;
-        this.prescription = prescription;
-        this.appointment = new ArrayList<>();
-        this.appointment = appointment;
+    public Patient(String name, String surname, String address, String id, String password, int age, String gender) {
+        this(name, surname, address, id, password, age, gender, true);
     }
-
 
     public int getAge() {
         return age;
@@ -86,15 +73,20 @@ public class Patient extends HospitalPerson {
     public ArrayList<Appointment> getAppointment() {
         return appointment;
     }
-    
 
     public void setAppointment(Appointment appointment) {
         this.appointment.add(appointment);
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
 
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+     
     
-
     public void requestCreateAccount() {
 
     }
@@ -140,5 +132,4 @@ public class Patient extends HospitalPerson {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-      
 }
