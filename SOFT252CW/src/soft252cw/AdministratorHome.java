@@ -43,6 +43,11 @@ public class AdministratorHome extends javax.swing.JFrame {
         cbSelectDoctor = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDoctorReviews = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaFeedback = new javax.swing.JTextArea();
+        btnPostFeedback = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -83,21 +88,39 @@ public class AdministratorHome extends javax.swing.JFrame {
         txtAreaDoctorReviews.setRows(5);
         jScrollPane1.setViewportView(txtAreaDoctorReviews);
 
+        jLabel12.setText("Doctor Reviews");
+
+        jLabel13.setText("Feedback");
+
+        txtAreaFeedback.setColumns(20);
+        txtAreaFeedback.setRows(5);
+        jScrollPane2.setViewportView(txtAreaFeedback);
+
+        btnPostFeedback.setText("Post Feedback");
+        btnPostFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostFeedbackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                    .addComponent(btnPostFeedback)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel12)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel11)
+                            .addGap(18, 18, 18)
+                            .addComponent(cbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2)))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +129,17 @@ public class AdministratorHome extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(cbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPostFeedback)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Doctor Feedback", jPanel2);
@@ -266,10 +297,6 @@ public class AdministratorHome extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void onLoad() {
-        Doctor doc;
-        Review review = new Review("ihfhgfhdfg", 2);
-        doc = (Doctor) hospital.people.get(2);
-        doc.setReview(review);
         lblAddOutput.setText("");
         lblRemoveOutput.setText("");
         populateCBs();
@@ -306,7 +333,6 @@ public class AdministratorHome extends javax.swing.JFrame {
         char IDletter = cbRemoveOccupation.getSelectedItem().toString().charAt(0);
 
         for (HospitalPerson person : hospital.people) {
-            System.out.println("ID: " + person.getID());
             if (person.getID().charAt(0) == IDletter) {
                 cbRemovePerson.addItem(person.getName() + " " + person.getSurname());
             }
@@ -341,13 +367,17 @@ public class AdministratorHome extends javax.swing.JFrame {
         populateCBs();
     }//GEN-LAST:event_cbRemoveOccupationActionPerformed
 
+    private void btnPostFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostFeedbackActionPerformed
+        txtAreaFeedback.getText();
+    }//GEN-LAST:event_btnPostFeedbackActionPerformed
+
     public void displayDoctorReviews() {
         txtAreaDoctorReviews.setText("");
         
         getCurrentDoctor(cbSelectDoctor.getSelectedItem().toString());
 
         for (int i = 0; i < currentDoctor.getReview().size(); i++) {
-            txtAreaDoctorReviews.append(currentDoctor.getName() + " " + currentDoctor.getSurname() + " was given "
+            txtAreaDoctorReviews.append("- "+currentDoctor.getName() + " " + currentDoctor.getSurname() + " was given "
                     + currentDoctor.getReview().get(i).getRating() + "/5 stars : "
                     + currentDoctor.getReview().get(i).getReview() + "\n");
         }
@@ -373,6 +403,7 @@ public class AdministratorHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPerson;
+    private javax.swing.JButton btnPostFeedback;
     private javax.swing.JButton btnRemovePerson;
     private javax.swing.JComboBox<String> cbAddOccupation;
     private javax.swing.JComboBox<String> cbRemoveOccupation;
@@ -381,6 +412,8 @@ public class AdministratorHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -392,12 +425,14 @@ public class AdministratorHome extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblAddOutput;
     private javax.swing.JLabel lblRemoveOutput;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextArea txtAreaDoctorReviews;
+    private javax.swing.JTextArea txtAreaFeedback;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtSurname;

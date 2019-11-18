@@ -7,12 +7,6 @@ package soft252cw;
 
 import java.util.Calendar;
 import java.util.Date;
-import soft252cw.Appointment;
-import soft252cw.Doctor;
-import soft252cw.Hospital;
-import soft252cw.Patient;
-import soft252cw.Review;
-
 /**
  *
  * @author Oliver
