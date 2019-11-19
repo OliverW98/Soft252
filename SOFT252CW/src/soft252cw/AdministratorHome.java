@@ -306,7 +306,7 @@ public class AdministratorHome extends javax.swing.JFrame {
 
     private void btnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonActionPerformed
         Random rand = new Random();
-        String id = String.format("%04d%n", rand.nextInt(10000));
+        String id = Integer.toString(rand.nextInt(9000)+1000);
 
         if (cbAddOccupation.getSelectedItem().equals("Doctor") && !"".equals(txtName.getText()) && !"".equals(txtSurname.getText())
                 && !"".equals(txtAddress.getText()) && !"".equals(txtPassword.getText())) {
