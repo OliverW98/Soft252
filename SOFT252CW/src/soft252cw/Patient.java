@@ -19,23 +19,25 @@ public class Patient extends HospitalPerson {
     private Prescription prescription;
     ArrayList<Appointment> appointment;
     private boolean approved;
+    private boolean terminated;
 
     public Patient() {
     }
 
-    public Patient(String name, String surname, String address, String id, String password, int age, String gender, boolean approved) {
+    public Patient(String name, String surname, String address, String id, String password, int age, String gender, boolean approved, boolean terminated ) {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
         this.notes = "";
-        Prescription pre = new Prescription("", 0, "");
+        Prescription pre = new Prescription("", 0, "",false);
         this.prescription = pre;
         this.appointment = new ArrayList<>();
         this.approved = approved;
+        this.terminated = terminated;
     }
 
     public Patient(String name, String surname, String address, String id, String password, int age, String gender) {
-        this(name, surname, address, id, password, age, gender, true);
+        this(name, surname, address, id, password, age, gender, true, false);
     }
 
     public int getAge() {

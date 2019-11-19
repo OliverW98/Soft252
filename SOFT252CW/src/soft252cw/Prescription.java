@@ -14,11 +14,13 @@ public class Prescription {
     private String medicine;
     private int quantity;
     private String dosage;
+    private boolean handedOut;
 
-    public Prescription(String medicine, int quantity, String dosage) {
+    public Prescription(String medicine, int quantity, String dosage, boolean handedOut) {
         this.medicine = medicine;
         this.quantity = quantity;
         this.dosage = dosage;
+        this.handedOut = handedOut; 
     }
 
     public String getMedicine() {
@@ -43,6 +45,14 @@ public class Prescription {
 
     public void setDosage(String dosage) {
         this.dosage = dosage;
+    }
+
+    public boolean isHandedOut() {
+        return handedOut;
+    }
+
+    public void setHandedOut(boolean handedOut) {
+        this.handedOut = handedOut;
     }
 
     

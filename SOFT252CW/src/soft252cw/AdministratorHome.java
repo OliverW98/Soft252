@@ -48,6 +48,7 @@ public class AdministratorHome extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaFeedback = new javax.swing.JTextArea();
         btnPostFeedback = new javax.swing.JButton();
+        btnClose1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -69,6 +70,7 @@ public class AdministratorHome extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnRemovePerson = new javax.swing.JButton();
         lblRemoveOutput = new javax.swing.JLabel();
+        btnClose2 = new javax.swing.JButton();
 
         jLabel5.setText("jLabel2");
 
@@ -103,6 +105,13 @@ public class AdministratorHome extends javax.swing.JFrame {
             }
         });
 
+        btnClose1.setText("Close");
+        btnClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -121,6 +130,10 @@ public class AdministratorHome extends javax.swing.JFrame {
                             .addComponent(cbSelectDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane2)))
                 .addContainerGap(317, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +152,9 @@ public class AdministratorHome extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPostFeedback)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose1)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Doctor Feedback", jPanel2);
@@ -189,6 +204,13 @@ public class AdministratorHome extends javax.swing.JFrame {
 
         lblRemoveOutput.setText("jLabel11");
 
+        btnClose2.setText("Close");
+        btnClose2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -228,6 +250,10 @@ public class AdministratorHome extends javax.swing.JFrame {
                     .addComponent(btnAddPerson)
                     .addComponent(lblAddOutput))
                 .addGap(109, 109, 109))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose2)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +303,9 @@ public class AdministratorHome extends javax.swing.JFrame {
                 .addComponent(btnAddPerson)
                 .addGap(18, 18, 18)
                 .addComponent(lblAddOutput)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(btnClose2)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Add / Remove", jPanel1);
@@ -371,6 +399,21 @@ public class AdministratorHome extends javax.swing.JFrame {
         txtAreaFeedback.getText();
     }//GEN-LAST:event_btnPostFeedbackActionPerformed
 
+    private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose1ActionPerformed
+
+    private void btnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose2ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose2ActionPerformed
+
+    public void exitPage() {
+        this.setVisible(false);
+        LogIn tempLogIn = new LogIn();
+        tempLogIn.setVisible(true);
+        tempLogIn.updateHospital(hospital);
+    }
+    
     public void displayDoctorReviews() {
         txtAreaDoctorReviews.setText("");
         
@@ -403,6 +446,8 @@ public class AdministratorHome extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPerson;
+    private javax.swing.JButton btnClose1;
+    private javax.swing.JButton btnClose2;
     private javax.swing.JButton btnPostFeedback;
     private javax.swing.JButton btnRemovePerson;
     private javax.swing.JComboBox<String> cbAddOccupation;

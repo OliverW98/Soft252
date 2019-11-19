@@ -30,11 +30,11 @@ public class DoctorHome extends javax.swing.JFrame {
         
         Calendar cal1 = Calendar.getInstance();
         cal1.set(2020, 5, 12, 13, 30,0);
-        Appointment appointmen1 = new Appointment(cal1.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname());
+        Appointment appointmen1 = new Appointment(cal1.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname(),true);
         
         Calendar cal2 = Calendar.getInstance();
         cal1.set(2020, 5, 13, 9, 30,0);
-        Appointment appointmen2 = new Appointment(cal1.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname());
+        Appointment appointmen2 = new Appointment(cal1.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname(), false);
         
         Patient pat1 = (Patient) hospital.people.get(5);
         pat1.setAppointment(appointmen1);
@@ -53,7 +53,9 @@ public class DoctorHome extends javax.swing.JFrame {
             if (person.getID().charAt(0) == 'P') {
                 Patient pat = (Patient) person;
                 for (int i = 0; i < pat.getAppointment().size(); i++) {
-                    if (pat.getAppointment().get(i).getDate().after(date) && currentDoctorName.equals(pat.getAppointment().get(i).getDoctorName())) {
+                    if (pat.getAppointment().get(i).getDate().after(date) && 
+                            currentDoctorName.equals(pat.getAppointment().get(i).getDoctorName())
+                            && pat.getAppointment().get(i).isApprovesd() == true) {
                         txtAreaAppointments.append("- You have an appointment with " + pat.getName() + " " + pat.getSurname()
                                 + " on " + pat.getAppointment().get(i).getDate() + "\n");
                     }
@@ -74,23 +76,39 @@ public class DoctorHome extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        btnClose1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaAppointments = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        btnClose2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        btnClose3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnClose1.setText("Close");
+        btnClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(676, Short.MAX_VALUE)
+                .addComponent(btnClose1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(388, Short.MAX_VALUE)
+                .addComponent(btnClose1)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Current Appointment", jPanel1);
@@ -100,6 +118,13 @@ public class DoctorHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtAreaAppointments);
 
         jLabel1.setText("Your Appointments");
+
+        btnClose2.setText("Close");
+        btnClose2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -111,6 +136,10 @@ public class DoctorHome extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(351, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose2)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,20 +148,35 @@ public class DoctorHome extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addComponent(btnClose2)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("View Appointments", jPanel2);
+
+        btnClose3.setText("Close");
+        btnClose3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(676, Short.MAX_VALUE)
+                .addComponent(btnClose3)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(388, Short.MAX_VALUE)
+                .addComponent(btnClose3)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Create Medicine", jPanel3);
@@ -151,12 +195,34 @@ public class DoctorHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose1ActionPerformed
+
+    private void btnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose2ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose2ActionPerformed
+
+    private void btnClose3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose3ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose3ActionPerformed
+
+    public void exitPage() {
+        this.setVisible(false);
+        LogIn tempLogIn = new LogIn();
+        tempLogIn.setVisible(true);
+        tempLogIn.updateHospital(hospital);
+    }
+    
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClose1;
+    private javax.swing.JButton btnClose2;
+    private javax.swing.JButton btnClose3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
