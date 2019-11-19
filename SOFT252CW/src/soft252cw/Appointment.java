@@ -15,12 +15,12 @@ public class Appointment {
     
     private Date date;
     private String doctorName;
-    private boolean approvesd;
+    private boolean approved;
 
     public Appointment(Date date, String doctorName, boolean approved) {
         this.date = date;
         this.doctorName = doctorName;
-        this.approvesd = approved;
+        this.approved = approved;
     }
 
     public Date getDate() {    
@@ -40,11 +40,11 @@ public class Appointment {
     }
 
     public boolean isApprovesd() {
-        return approvesd;
+        return approved;
     }
 
     public void setApprovesd(boolean approvesd) {
-        this.approvesd = approvesd;
+        this.approved = approvesd;
     }
     
     

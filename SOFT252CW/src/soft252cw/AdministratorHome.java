@@ -16,13 +16,11 @@ public class AdministratorHome extends javax.swing.JFrame {
     /**
      * Creates new form AdministratorHome
      */
-    private Administrator currentAdmin;
     private Hospital hospital;
     private Doctor currentDoctor;
 
-    public AdministratorHome(Administrator admin, Hospital hospital) {
+    public AdministratorHome (Hospital hospital) {
         initComponents();
-        this.currentAdmin = admin;
         this.hospital = hospital;
     }
 

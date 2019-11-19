@@ -5,6 +5,7 @@
  */
 package soft252cw;
 
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 /**
@@ -45,6 +46,9 @@ public class PatientHome extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnClose1 = new javax.swing.JButton();
+        btnTermination = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        lblRemoveOutput = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         cbViewDoctor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -100,24 +104,45 @@ public class PatientHome extends javax.swing.JFrame {
             }
         });
 
+        btnTermination.setText("Request Termination");
+        btnTermination.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminationActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Request for account termination.");
+
+        lblRemoveOutput.setText("jLabel12");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(83, 83, 83))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnClose1)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnTermination)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(83, 83, 83))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRemoveOutput)
+                            .addComponent(jLabel11))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +155,13 @@ public class PatientHome extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(btnTermination)
+                .addGap(18, 18, 18)
+                .addComponent(lblRemoveOutput)
+                .addGap(33, 33, 33)
                 .addComponent(btnClose1)
                 .addContainerGap())
         );
@@ -382,6 +413,8 @@ public class PatientHome extends javax.swing.JFrame {
         displayDoctorReview();
         dispalyPatientPerscription();
         dispalyPatientHistory();
+        lblViewDoctorOutput.setText("");
+        lblRemoveOutput.setText("");
     }
 
     private void cbViewDoctorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbViewDoctorItemStateChanged
@@ -445,14 +478,13 @@ public class PatientHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPostReviewActionPerformed
 
     private void btnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAppointmentActionPerformed
-
         getCurrentDoctor(cbRequestDoctor.getSelectedItem().toString());
 
-        int year = Integer.parseInt(cbRequestYear.getName());
-        int month = Integer.parseInt(cbRequestMonth.getName());
-        int day = Integer.parseInt(cbRequestDay.getName());
-        int hour = Integer.parseInt(cbRequestHour.getName());
-        int mins = Integer.parseInt(cbRequestMins.getName());
+        int year = Integer.parseInt(cbRequestYear.getSelectedItem().toString());
+        int month = cbRequestMonth.getSelectedIndex() + 1;
+        int day = Integer.parseInt(cbRequestDay.getSelectedItem().toString());
+        int hour = Integer.parseInt(cbRequestHour.getSelectedItem().toString());
+        int mins = Integer.parseInt(cbRequestMins.getSelectedItem().toString());
 
         Calendar cal = Calendar.getInstance();
 
@@ -473,6 +505,11 @@ public class PatientHome extends javax.swing.JFrame {
         exitPage();
     }//GEN-LAST:event_btnClose3ActionPerformed
 
+    private void btnTerminationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminationActionPerformed
+        currentPatient.setRemoveRequest(true);
+        lblRemoveOutput.setText("You Request has been sent");
+    }//GEN-LAST:event_btnTerminationActionPerformed
+
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
@@ -480,8 +517,7 @@ public class PatientHome extends javax.swing.JFrame {
         tempLogIn.updateHospital(hospital);
     }
     
-    public void populateDoctorCBs() {
-        lblViewDoctorOutput.setText("");
+    public void populateDoctorCBs() {       
         hospital.people.forEach((_item) -> {
             if (_item.getID().substring(0, 1).equals("D")) {
                 cbViewDoctor.addItem(_item.getName() + " " + _item.getSurname());
@@ -521,7 +557,6 @@ public class PatientHome extends javax.swing.JFrame {
                 txtAreaAppointments.append("- You have an a appointment with " + currentPatient.getAppointment().get(i).getDoctorName()
                         + " on " + currentPatient.getAppointment().get(i).getDate() + "\n");
             }
-
         }
     }
 
@@ -531,6 +566,7 @@ public class PatientHome extends javax.swing.JFrame {
     private javax.swing.JButton btnClose3;
     private javax.swing.JButton btnPostReview;
     private javax.swing.JButton btnRequestAppointment;
+    private javax.swing.JButton btnTermination;
     private javax.swing.JComboBox<String> cbDoctorStarRating;
     private javax.swing.JComboBox<String> cbRequestDay;
     private javax.swing.JComboBox<String> cbRequestDoctor;
@@ -541,6 +577,7 @@ public class PatientHome extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbViewDoctor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -558,6 +595,7 @@ public class PatientHome extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblRemoveOutput;
     private javax.swing.JLabel lblRequestApp;
     private javax.swing.JLabel lblViewDoctorOutput;
     private javax.swing.JLabel lblYourApps;

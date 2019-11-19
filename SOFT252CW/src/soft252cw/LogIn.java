@@ -25,9 +25,6 @@ public class LogIn extends javax.swing.JFrame {
     
     public void updateHospital(Hospital hospital){
         this.hospital = hospital;
-        for(HospitalPerson person : hospital.people) {
-            System.out.println("Person: " + person.id + "   " + person.password);
-        }
     }
 
     /**
@@ -128,18 +125,19 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRequestAccountActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        System.out.println("Username: " + txtUniqueID.getText() + "\nPassword:  " + txtPassword.getText());
         hospital.people.forEach((_item) -> {
             
              boolean uniqueid =  txtUniqueID.getText().equals(_item.getID());
              boolean password = txtPassword.getText().equals(_item.getPassword());
                     
         if(_item.getID().substring(0, 1).equals("A") &&uniqueid == true && password == true){
-            AdministratorHome tempAdministratorHome = new AdministratorHome((Administrator)_item, hospital);
+            AdministratorHome tempAdministratorHome = new AdministratorHome(hospital);
             tempAdministratorHome.setVisible(true);
             tempAdministratorHome.onLoad();
         } else if(_item.getID().substring(0, 1).equals("S") && uniqueid == true && password == true){
-            // go to page
+            SecretaryHome tempSecretaryHome = new SecretaryHome(hospital);
+            tempSecretaryHome.setVisible(true);
+            tempSecretaryHome.onLoad();
         }  else if(_item.getID().substring(0, 1).equals("D") && uniqueid == true && password == true){
             DoctorHome tempDoctorHome = new DoctorHome((Doctor)_item, hospital);
             tempDoctorHome.setVisible(true);

@@ -201,7 +201,8 @@ public class RequestAccountCreation extends javax.swing.JFrame {
 
             Patient patient = new Patient(txtName.getText(), txtSurname.getText(),
                     txtAddress.getText(), "P" + Integer.toString(rand.nextInt(9000) + 1000),
-                    txtPassword.getText(), Integer.parseInt(txtAge.getText()), (String) cbGender.getSelectedItem(), false);
+                    txtPassword.getText(), Integer.parseInt(txtAge.getText()), 
+                    (String) cbGender.getSelectedItem(), false, false);
             hospital.people.add(patient);
 
             JOptionPane.showMessageDialog(null, "Request has been sent");

@@ -14,10 +14,69 @@ public class SecretaryHome extends javax.swing.JFrame {
     /**
      * Creates new form SecretaryHome
      */
-    public SecretaryHome() {
+    
+    public Hospital hospital;
+    
+    public SecretaryHome(Hospital hospital) {
         initComponents();
+        this.hospital = hospital;
     }
+    
+    public void onLoad(){
+         displayPatientsToApprove();
+         displayPatientsToRemove();
+         displayPatientsWithAppointments();
+    }
+    
+    public void displayPatientsToApprove(){
+        cbApprovePatient.removeAllItems();
+        for (HospitalPerson person : hospital.people) {
+            if (person.getID().charAt(0) == 'P') {
+                Patient pat = (Patient) person;
+                if (pat.isApproved() == false) {
+                    cbApprovePatient.addItem(pat.getName()+ " "+ pat.getSurname());
+                }
+            }
+        }
+    }
+ 
+    public void displayPatientsToRemove() {
+        cbRemovePatient.removeAllItems();
+        for (HospitalPerson person : hospital.people) {
+            if (person.getID().charAt(0) == 'P') {
+                Patient pat = (Patient) person;
+                if (pat.isRemoveRequest() == true) {
+                    cbRemovePatient.addItem(pat.getName() + " " + pat.getSurname());
+                }
+            }
+        }
+    }
+    
+    public void displayPatientsWithAppointments(){
+        cbPatients.removeAllItems();
+        for (HospitalPerson person : hospital.people) {
+            if (person.getID().charAt(0) == 'P') {   
+                cbPatients.addItem(person.getName()+" "+ person.getSurname());
+                Patient pat = (Patient) person;
+                displayAppointmentsToCreate(pat);
+            }
+        } 
+    }
+    
+    public void displayAppointmentsToCreate(Patient pat){
+        cbAppointments.removeAllItems();
+        for (int i = 0; i < pat.getAppointment().size(); i++) {
+            if (pat.getAppointment().get(i).isApprovesd() == false) {
+                cbAppointments.addItem(pat.getAppointment().get(i).getDoctorName()
+                        + " on " + pat.getAppointment().get(i).getDate());
 
+            }
+        }
+    }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +86,7 @@ public class SecretaryHome extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel4 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -35,7 +95,13 @@ public class SecretaryHome extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cbRemovePatient = new javax.swing.JComboBox<>();
         btnRemove = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cbPatients = new javax.swing.JComboBox<>();
+        cbAppointments = new javax.swing.JComboBox<>();
+        btnCreateAppointment = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+
+        jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,26 +113,35 @@ public class SecretaryHome extends javax.swing.JFrame {
 
         btnRemove.setText("Remove");
 
+        jLabel3.setText("Patient Requests for appointmets:");
+
+        btnCreateAppointment.setText("Create Appointment");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(55, 55, 55)
-                        .addComponent(cbApprovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbRemovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnApprove)
-                    .addComponent(btnRemove))
-                .addContainerGap(257, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(54, 54, 54)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCreateAppointment)
+                    .addComponent(cbAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbApprovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cbRemovePatient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnApprove)
+                            .addComponent(btnRemove))))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,10 +154,17 @@ public class SecretaryHome extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbRemovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnRemove)))
-                .addContainerGap(322, Short.MAX_VALUE))
+                    .addComponent(cbRemovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemove))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbPatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(cbAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCreateAppointment)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Approve Patients", jPanel1);
@@ -117,45 +199,19 @@ public class SecretaryHome extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SecretaryHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SecretaryHome().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnCreateAppointment;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JComboBox<String> cbAppointments;
     private javax.swing.JComboBox<String> cbApprovePatient;
+    private javax.swing.JComboBox<String> cbPatients;
     private javax.swing.JComboBox<String> cbRemovePatient;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;

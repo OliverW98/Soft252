@@ -19,12 +19,12 @@ public class Patient extends HospitalPerson {
     private Prescription prescription;
     ArrayList<Appointment> appointment;
     private boolean approved;
-    private boolean terminated;
+    private boolean removeRequest;
 
     public Patient() {
     }
 
-    public Patient(String name, String surname, String address, String id, String password, int age, String gender, boolean approved, boolean terminated ) {
+    public Patient(String name, String surname, String address, String id, String password, int age, String gender, boolean approved, boolean removeRequest ) {
         super(name, surname, address, id, password);
         this.age = age;
         this.gender = gender;
@@ -33,7 +33,7 @@ public class Patient extends HospitalPerson {
         this.prescription = pre;
         this.appointment = new ArrayList<>();
         this.approved = approved;
-        this.terminated = terminated;
+        this.removeRequest = removeRequest;
     }
 
     public Patient(String name, String surname, String address, String id, String password, int age, String gender) {
@@ -87,19 +87,16 @@ public class Patient extends HospitalPerson {
     public void setApproved(boolean approved) {
         this.approved = approved;
     }
-     
+
+    public boolean isRemoveRequest() {
+        return removeRequest;
+    }
+
+    public void setRemoveRequest(boolean removeRequest) {
+        this.removeRequest = removeRequest;
+    }
+
     
-    public void requestCreateAccount() {
-
-    }
-
-    public void requestAppointment() {
-
-    }
-
-    public void requestAccountTermination() {
-
-    }
 
     @Override
     public int hashCode() {
