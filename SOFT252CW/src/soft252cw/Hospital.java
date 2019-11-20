@@ -35,7 +35,7 @@ public ArrayList<HospitalPerson> people;
         Patient patient4 = new Patient("alex","johnson","3 Baytree Gardens, Plymouth PL2 2QQ","P8253" ,"password",62,"female",false ,false);
         Patient patient5 = new Patient("charlotte","webb","1 Swale Cl, Plymouth PL3 6NY","P0824","logmein",33,"female",false,true);
         
-         Calendar cal1 = Calendar.getInstance();
+        Calendar cal1 = Calendar.getInstance();
 
         cal1.set(2020, 1, 12, 12, 10,0);
 
@@ -56,6 +56,8 @@ public ArrayList<HospitalPerson> people;
         patient4.setAppointment(appointment1);
         patient4.setAppointment(appointment2);
         patient5.setAppointment(appointment3);
+        
+        //Prescription(String medicine, int quantity, String dosage, boolean handedOut)
         
         people.add(admin);
         people.add(secretary);

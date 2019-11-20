@@ -11,21 +11,21 @@ import java.util.ArrayList;
  *
  * @author Oliver
  */
-public class MedicineStcok {
-    ArrayList<Medicine> medicine = new ArrayList<>();
+public class MedicineStock {
+    ArrayList<Medicine> medicine; 
 
-    public MedicineStcok() {
-        
-        Medicine med1 = new Medicine("name1",10);
-        Medicine med2 = new Medicine("name2",10);
-        Medicine med3 = new Medicine("name3",10);
-        Medicine med4 = new Medicine("name4",10);
-        Medicine med5 = new Medicine("name5",10);
-        Medicine med6 = new Medicine("name6",10);
-        Medicine med7 = new Medicine("name7",10);
+    public MedicineStock() {
+        medicine = new ArrayList<>();
+        Medicine med1 = new Medicine("name1",100);
+        Medicine med2 = new Medicine("name2",100);
+        Medicine med3 = new Medicine("name3",100);
+        Medicine med4 = new Medicine("name4",100);
+        Medicine med5 = new Medicine("name5",80);
+        Medicine med6 = new Medicine("name6",100);
+        Medicine med7 = new Medicine("name7",100);
         Medicine med8 = new Medicine("name8",10);
-        Medicine med9 = new Medicine("name9",10);
-        Medicine med10 = new Medicine("name10",10);
+        Medicine med9 = new Medicine("name9",100);
+        Medicine med10 = new Medicine("name10",100);
         
         medicine.add(med1);
         medicine.add(med2);
@@ -39,7 +39,5 @@ public class MedicineStcok {
         medicine.add(med10);
         
     }
-    
-    
-    
 }
+    

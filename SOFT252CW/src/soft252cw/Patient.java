@@ -29,8 +29,7 @@ public class Patient extends HospitalPerson {
         this.age = age;
         this.gender = gender;
         this.notes = "";
-        Prescription pre = new Prescription("", 0, "",false);
-        this.prescription = pre;
+        this.prescription = null;
         this.appointment = new ArrayList<>();
         this.approved = approved;
         this.removeRequest = removeRequest;

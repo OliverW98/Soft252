@@ -17,19 +17,29 @@ public class SecretaryHome extends javax.swing.JFrame {
     
     public Hospital hospital;
     public Patient currentPatient;
+    public MedicineStock medStock;
     
-    public SecretaryHome(Hospital hospital) {
+    public SecretaryHome(Hospital hospital ,MedicineStock medStock) {
         initComponents();
         this.hospital = hospital;
+        this.medStock = medStock;
     }
     
-    public void onLoad(){
+    public void onLoad(){   
+        
+        Prescription pre = new Prescription(medStock.medicine.get(3),10 ,"all day ", false);
+        Patient pat = (Patient)hospital.people.get(5);
+        
+        pat.setPrescription(pre);
+              
         lblApproveOutput.setText("");
         lblRemoveOutput.setText("");
         lblAppointmentsOutput.setText("");
          displayPatientsToApprove();
          displayPatientsToRemove();
          displayPatientsWithAppointments();
+         displayPatientsWithPrescriptions();
+         displayMedicineToRestock();
     }
     
     public void displayPatientsToApprove(){
@@ -58,8 +68,46 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }
     
+    public void displayPatientsWithPrescriptions(){
+        cbPatientsPrescription.removeAllItems();
+        
+        for (HospitalPerson person : hospital.people) {
+            if (person.getID().charAt(0) == 'P') {
+                Patient pat = (Patient) person;
+                if (pat.getPrescription()!= null && pat.getPrescription().isHandedOut() == false) {
+                    cbPatientsPrescription.addItem(pat.getName() + " " + pat.getSurname());
+                }
+            }
+        }
+           displayPrescriptions();
+    }
+    
+    public void displayPrescriptions(){
+        txtAreaPrescrpitions.setText("");
+        if(cbPatientsPrescription.getSelectedItem()!=null){
+            getCurrentPatient(cbPatientsPrescription.getSelectedItem().toString());
+
+            if (currentPatient.getPrescription() != null) {
+                txtAreaPrescrpitions.setText("Medicine : " + currentPatient.getPrescription().getMedicine().getName() + "\n"
+                        + "Quantity : " + currentPatient.getPrescription().getQuantity() + "\n"
+                        + "Dosage : " + currentPatient.getPrescription().getDosage());
+            } 
+        }
+    }
+    
+    public void displayMedicineToRestock(){
+        
+        for(int i=0;i < medStock.medicine.size();i++){
+            if (medStock.medicine.get(i).getStock()<100){
+                txtAreaMedicine.append(medStock.medicine.get(i).getName()+" has a stock of : "
+                        + medStock.medicine.get(i).getStock()+" and needs to be restocked.\n");
+            }
+        }    
+    }
+    
+    
     public void displayPatientsWithAppointments() {
-        cbPatients.removeAllItems();
+        cbPatientsAppointments.removeAllItems();
 
         System.out.println("Here ");
         for (HospitalPerson person : hospital.people) {
@@ -70,25 +118,26 @@ public class SecretaryHome extends javax.swing.JFrame {
                     System.out.println("Here 2");
                     if (pat.getAppointment().get(i).isApprovesd() == false) {
                         System.out.println("Here 3");
-                        cbPatients.addItem(person.getName() + " " + person.getSurname());
+                        cbPatientsAppointments.addItem(person.getName() + " " + person.getSurname());
 
                         // a name is added twice if have two appointments to approve.
                     }
                 }
             }
         }
-        displayAppointmentsToCreate();
+           displayAppointmentsToCreate();
     }
 
     public void displayAppointmentsToCreate() {
         txtAreaAppointment.setText("");
+        if(cbPatientsAppointments.getSelectedItem()!=null){
+            getCurrentPatient(cbPatientsAppointments.getSelectedItem().toString());
 
-        getCurrentPatient(cbPatients.getSelectedItem().toString());
-
-        for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
-            if (currentPatient.getAppointment().get(i).isApprovesd() == false) {
-                txtAreaAppointment.append(currentPatient.getAppointment().get(i).getDoctorName()
-                        + " on " + currentPatient.getAppointment().get(i).getDate() + "\n");
+            for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
+                if (currentPatient.getAppointment().get(i).isApprovesd() == false) {
+                    txtAreaAppointment.append(currentPatient.getAppointment().get(i).getDoctorName()
+                            + " on " + currentPatient.getAppointment().get(i).getDate() + "\n");
+                }
             }
         }
     }
@@ -117,6 +166,7 @@ public class SecretaryHome extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -126,7 +176,7 @@ public class SecretaryHome extends javax.swing.JFrame {
         cbRemovePatient = new javax.swing.JComboBox<>();
         btnRemove = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        cbPatients = new javax.swing.JComboBox<>();
+        cbPatientsAppointments = new javax.swing.JComboBox<>();
         btnCreateAppointment = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -134,9 +184,22 @@ public class SecretaryHome extends javax.swing.JFrame {
         lblApproveOutput = new javax.swing.JLabel();
         lblRemoveOutput = new javax.swing.JLabel();
         lblAppointmentsOutput = new javax.swing.JLabel();
+        btnClose2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        cbPatientsPrescription = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaPrescrpitions = new javax.swing.JTextArea();
+        btnHandOut = new javax.swing.JButton();
+        btnClose1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAreaMedicine = new javax.swing.JTextArea();
+        btnRestock = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
+
+        jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,9 +223,9 @@ public class SecretaryHome extends javax.swing.JFrame {
 
         jLabel3.setText("Patients with Requests for appointmets:");
 
-        cbPatients.addActionListener(new java.awt.event.ActionListener() {
+        cbPatientsAppointments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbPatientsActionPerformed(evt);
+                cbPatientsAppointmentsActionPerformed(evt);
             }
         });
 
@@ -184,6 +247,13 @@ public class SecretaryHome extends javax.swing.JFrame {
         lblRemoveOutput.setText("jLabel6");
 
         lblAppointmentsOutput.setText("jLabel6");
+
+        btnClose2.setText("Close");
+        btnClose2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,7 +278,7 @@ public class SecretaryHome extends javax.swing.JFrame {
                             .addComponent(cbApprovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(cbRemovePatient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbPatientsAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -220,6 +290,10 @@ public class SecretaryHome extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblRemoveOutput)))))
                 .addContainerGap(171, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose2)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +313,7 @@ public class SecretaryHome extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cbPatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbPatientsAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -248,20 +322,85 @@ public class SecretaryHome extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateAppointment)
                     .addComponent(lblAppointmentsOutput))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(btnClose2)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Approve Patients", jPanel1);
+
+        jLabel6.setText("Patients with Precscriptions to pickup :");
+
+        txtAreaPrescrpitions.setColumns(20);
+        txtAreaPrescrpitions.setRows(5);
+        jScrollPane2.setViewportView(txtAreaPrescrpitions);
+
+        btnHandOut.setText("Hand Out");
+        btnHandOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHandOutActionPerformed(evt);
+            }
+        });
+
+        btnClose1.setText("Close");
+        btnClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Medicine to be restocked :");
+
+        txtAreaMedicine.setColumns(20);
+        txtAreaMedicine.setRows(5);
+        jScrollPane3.setViewportView(txtAreaMedicine);
+
+        btnRestock.setText("Restock");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnClose1)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRestock)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(cbPatientsPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(btnHandOut))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3)))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbPatientsPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHandOut))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRestock)
+                .addGap(9, 9, 9)
+                .addComponent(btnClose1)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Medicine", jPanel2);
@@ -280,17 +419,17 @@ public class SecretaryHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPatientsActionPerformed
-        if (cbPatients.getSelectedItem() == null) {
+    private void cbPatientsAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPatientsAppointmentsActionPerformed
+        if (cbPatientsAppointments.getSelectedItem() == null) {
             System.out.println("oopsie");
         } else {
             for (HospitalPerson person : hospital.people) {
-                if (cbPatients.getSelectedItem().equals(person.getName() + " " + person.getSurname())) {
+                if (cbPatientsAppointments.getSelectedItem().equals(person.getName() + " " + person.getSurname())) {
                     displayAppointmentsToCreate();
                 }
             }
         }     
-    }//GEN-LAST:event_cbPatientsActionPerformed
+    }//GEN-LAST:event_cbPatientsAppointmentsActionPerformed
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         if (cbApprovePatient.getSelectedItem() != null) {
@@ -327,7 +466,7 @@ public class SecretaryHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
-        if(cbPatients.getSelectedItem() != null){
+        if(cbPatientsAppointments.getSelectedItem() != null){
             for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
                 if (currentPatient.getAppointment().get(i).isApprovesd() == false) {
                     currentPatient.getAppointment().get(i).setApprovesd(true);
@@ -339,29 +478,71 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCreateAppointmentActionPerformed
 
+    private void btnHandOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandOutActionPerformed
+        getCurrentPatient(cbPatientsPrescription.getSelectedItem().toString());
+
+        currentPatient.getPrescription().setHandedOut(true);
+
+        for (int i = 0; i < medStock.medicine.size(); i++) {
+
+            if (currentPatient.getPrescription().getMedicine().equals(medStock.medicine.get(i))) {
+                medStock.medicine.get(i).setStock(medStock.medicine.get(i).getStock()
+                        - currentPatient.getPrescription().getQuantity());
+            }
+        }
+        displayPatientsWithPrescriptions();
+    }//GEN-LAST:event_btnHandOutActionPerformed
+
+    private void btnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose2ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose2ActionPerformed
+
+    private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
+        exitPage();
+    }//GEN-LAST:event_btnClose1ActionPerformed
+    
+    public void exitPage() {
+        this.setVisible(false);
+        LogIn tempLogIn = new LogIn();
+        tempLogIn.setVisible(true);
+        tempLogIn.updateHospital(hospital);
+        tempLogIn.updateMedicineStock(medStock);
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApprove;
+    private javax.swing.JButton btnClose1;
+    private javax.swing.JButton btnClose2;
     private javax.swing.JButton btnCreateAppointment;
+    private javax.swing.JButton btnHandOut;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnRestock;
     private javax.swing.JComboBox<String> cbApprovePatient;
-    private javax.swing.JComboBox<String> cbPatients;
+    private javax.swing.JComboBox<String> cbPatientsAppointments;
+    private javax.swing.JComboBox<String> cbPatientsPrescription;
     private javax.swing.JComboBox<String> cbRemovePatient;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAppointmentsOutput;
     private javax.swing.JLabel lblApproveOutput;
     private javax.swing.JLabel lblRemoveOutput;
     private javax.swing.JTextArea txtAreaAppointment;
+    private javax.swing.JTextArea txtAreaMedicine;
+    private javax.swing.JTextArea txtAreaPrescrpitions;
     // End of variables declaration//GEN-END:variables
 }

@@ -542,11 +542,11 @@ public class PatientHome extends javax.swing.JFrame {
     }
 
     public void dispalyPatientPerscription() {
-
-        txtAreaPerscription.setText("Medicine : " + currentPatient.getPrescription().getMedicine() + "\n"
+        if(currentPatient.getPrescription() != null){
+                    txtAreaPerscription.setText("Medicine : " + currentPatient.getPrescription().getMedicine().getName() + "\n"
                 + "Quantity : " + currentPatient.getPrescription().getQuantity() + "\n"
                 + "Dosage : " + currentPatient.getPrescription().getDosage());
-
+        }
     }
 
     public void displayPatientsAppointments() {

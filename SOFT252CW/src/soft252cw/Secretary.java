@@ -18,14 +18,6 @@ public class Secretary extends HospitalPerson {
         super(name, surname, address, id, password);
     }
 
-
-    public void createAppointment(){
-        
-    }
-    
-    public void giveMedicine(){
-        
-    }
     
     public void orderMedicine(){
         

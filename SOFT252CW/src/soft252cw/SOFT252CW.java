@@ -13,7 +13,6 @@ public class SOFT252CW {
     /**
      * @param args the command line arguments
      */
-    Hospital hospital;
     
     public static void main(String[] args) {
         // TODO code application logic here

@@ -11,25 +11,26 @@ package soft252cw;
  */
 public class Prescription {
     
-    private String medicine;
+    private Medicine medicine;
     private int quantity;
     private String dosage;
     private boolean handedOut;
 
-    public Prescription(String medicine, int quantity, String dosage, boolean handedOut) {
+    public Prescription(Medicine medicine, int quantity, String dosage, boolean handedOut) {
         this.medicine = medicine;
         this.quantity = quantity;
         this.dosage = dosage;
         this.handedOut = handedOut; 
     }
 
-    public String getMedicine() {
+    public Medicine getMedicine() {
         return medicine;
     }
 
-    public void setMedicine(String medicine) {
+    public void setMedicine(Medicine medicine) {
         this.medicine = medicine;
     }
+
 
     public int getQuantity() {
         return quantity;

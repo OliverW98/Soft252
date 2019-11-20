@@ -16,15 +16,21 @@ public class LogIn extends javax.swing.JFrame {
      */
     
     public Hospital hospital;
+    public MedicineStock medStock;
     
     public LogIn() {
         initComponents();
         lblOutput.setText("");
         hospital = new Hospital();
+        medStock = new MedicineStock();
     }
     
     public void updateHospital(Hospital hospital){
         this.hospital = hospital;
+    }
+    
+    public void updateMedicineStock(MedicineStock medStock){
+        this.medStock = medStock;
     }
 
     /**
@@ -135,7 +141,7 @@ public class LogIn extends javax.swing.JFrame {
             tempAdministratorHome.setVisible(true);
             tempAdministratorHome.onLoad();
         } else if(_item.getID().substring(0, 1).equals("S") && uniqueid == true && password == true){
-            SecretaryHome tempSecretaryHome = new SecretaryHome(hospital);
+            SecretaryHome tempSecretaryHome = new SecretaryHome(hospital,medStock);
             tempSecretaryHome.setVisible(true);
             tempSecretaryHome.onLoad();
         }  else if(_item.getID().substring(0, 1).equals("D") && uniqueid == true && password == true){
