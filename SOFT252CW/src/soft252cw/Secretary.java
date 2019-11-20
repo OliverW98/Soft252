@@ -18,10 +18,7 @@ public class Secretary extends HospitalPerson {
         super(name, surname, address, id, password);
     }
 
-    public void approvePatientAccount(){
-        
-    }
-    
+
     public void createAppointment(){
         
     }
@@ -33,10 +30,6 @@ public class Secretary extends HospitalPerson {
     public void orderMedicine(){
         
     }
-    
-    public void removePatient(){
-        
-    }
-    
+
     
 }

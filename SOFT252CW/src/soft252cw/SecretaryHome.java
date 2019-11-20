@@ -16,6 +16,7 @@ public class SecretaryHome extends javax.swing.JFrame {
      */
     
     public Hospital hospital;
+    public Patient currentPatient;
     
     public SecretaryHome(Hospital hospital) {
         initComponents();
@@ -23,6 +24,9 @@ public class SecretaryHome extends javax.swing.JFrame {
     }
     
     public void onLoad(){
+        lblApproveOutput.setText("");
+        lblRemoveOutput.setText("");
+        lblAppointmentsOutput.setText("");
          displayPatientsToApprove();
          displayPatientsToRemove();
          displayPatientsWithAppointments();
@@ -41,7 +45,9 @@ public class SecretaryHome extends javax.swing.JFrame {
     }
  
     public void displayPatientsToRemove() {
-        cbRemovePatient.removeAllItems();
+        cbRemovePatient.removeAllItems();    
+        
+        
         for (HospitalPerson person : hospital.people) {
             if (person.getID().charAt(0) == 'P') {
                 Patient pat = (Patient) person;
@@ -52,29 +58,53 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }
     
-    public void displayPatientsWithAppointments(){
+    public void displayPatientsWithAppointments() {
         cbPatients.removeAllItems();
-        for (HospitalPerson person : hospital.people) {
-            if (person.getID().charAt(0) == 'P') {   
-                cbPatients.addItem(person.getName()+" "+ person.getSurname());
-                Patient pat = (Patient) person;
-                displayAppointmentsToCreate(pat);
-            }
-        } 
-    }
-    
-    public void displayAppointmentsToCreate(Patient pat){
-        cbAppointments.removeAllItems();
-        for (int i = 0; i < pat.getAppointment().size(); i++) {
-            if (pat.getAppointment().get(i).isApprovesd() == false) {
-                cbAppointments.addItem(pat.getAppointment().get(i).getDoctorName()
-                        + " on " + pat.getAppointment().get(i).getDate());
 
+        System.out.println("Here ");
+        for (HospitalPerson person : hospital.people) {
+            if (person.getID().charAt(0) == 'P') {
+                System.out.println("Here 1");
+                Patient pat = (Patient) person;
+                for (int i = 0; i < pat.getAppointment().size(); i++) {
+                    System.out.println("Here 2");
+                    if (pat.getAppointment().get(i).isApprovesd() == false) {
+                        System.out.println("Here 3");
+                        cbPatients.addItem(person.getName() + " " + person.getSurname());
+
+                        // a name is added twice if have two appointments to approve.
+                    }
+                }
+            }
+        }
+        displayAppointmentsToCreate();
+    }
+
+    public void displayAppointmentsToCreate() {
+        txtAreaAppointment.setText("");
+
+        getCurrentPatient(cbPatients.getSelectedItem().toString());
+
+        for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
+            if (currentPatient.getAppointment().get(i).isApprovesd() == false) {
+                txtAreaAppointment.append(currentPatient.getAppointment().get(i).getDoctorName()
+                        + " on " + currentPatient.getAppointment().get(i).getDate() + "\n");
             }
         }
     }
-    
-    
+
+    public void getCurrentPatient(String selectedPatient) {
+        String PatientName = selectedPatient;
+
+        hospital.people.forEach((_item) -> {
+
+            boolean nameTest = PatientName.equals(_item.getName() + " " + _item.getSurname());
+
+            if (nameTest == true) {
+                currentPatient = (Patient) _item;
+            }
+        });
+    }
     
     
     /**
@@ -97,8 +127,13 @@ public class SecretaryHome extends javax.swing.JFrame {
         btnRemove = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cbPatients = new javax.swing.JComboBox<>();
-        cbAppointments = new javax.swing.JComboBox<>();
         btnCreateAppointment = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtAreaAppointment = new javax.swing.JTextArea();
+        lblApproveOutput = new javax.swing.JLabel();
+        lblRemoveOutput = new javax.swing.JLabel();
+        lblAppointmentsOutput = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         jLabel4.setText("jLabel4");
@@ -108,14 +143,47 @@ public class SecretaryHome extends javax.swing.JFrame {
         jLabel1.setText("Patient accounts to be approved :");
 
         btnApprove.setText("Approve");
+        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApproveActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Patient accounts to be removed :");
 
         btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Patient Requests for appointmets:");
+        jLabel3.setText("Patients with Requests for appointmets:");
+
+        cbPatients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPatientsActionPerformed(evt);
+            }
+        });
 
         btnCreateAppointment.setText("Create Appointment");
+        btnCreateAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAppointmentActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Requested Appointments:");
+
+        txtAreaAppointment.setColumns(20);
+        txtAreaAppointment.setRows(5);
+        jScrollPane1.setViewportView(txtAreaAppointment);
+
+        lblApproveOutput.setText("jLabel6");
+
+        lblRemoveOutput.setText("jLabel6");
+
+        lblAppointmentsOutput.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,11 +194,15 @@ public class SecretaryHome extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(54, 54, 54)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCreateAppointment)
-                    .addComponent(cbAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCreateAppointment)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAppointmentsOutput))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbApprovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,9 +211,15 @@ public class SecretaryHome extends javax.swing.JFrame {
                                 .addComponent(cbPatients, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnApprove)
-                            .addComponent(btnRemove))))
-                .addContainerGap(255, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnApprove)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblApproveOutput))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRemove)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblRemoveOutput)))))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,21 +228,27 @@ public class SecretaryHome extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbApprovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnApprove))
+                    .addComponent(btnApprove)
+                    .addComponent(lblApproveOutput))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbRemovePatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemove))
+                    .addComponent(btnRemove)
+                    .addComponent(lblRemoveOutput))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbPatients, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(cbAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCreateAppointment)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreateAppointment)
+                    .addComponent(lblAppointmentsOutput))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Approve Patients", jPanel1);
@@ -196,6 +280,65 @@ public class SecretaryHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPatientsActionPerformed
+        if (cbPatients.getSelectedItem() == null) {
+            System.out.println("oopsie");
+        } else {
+            for (HospitalPerson person : hospital.people) {
+                if (cbPatients.getSelectedItem().equals(person.getName() + " " + person.getSurname())) {
+                    displayAppointmentsToCreate();
+                }
+            }
+        }     
+    }//GEN-LAST:event_cbPatientsActionPerformed
+
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+        if (cbApprovePatient.getSelectedItem() != null) {
+            String patientName = cbApprovePatient.getSelectedItem().toString();
+
+            for (HospitalPerson person : hospital.people) {
+                if (patientName.equals(person.getName() + " " + person.getSurname())) {
+                    Patient pat = (Patient) person;
+                    pat.setApproved(true);
+                }
+            }
+            displayPatientsToApprove();
+        }else{
+            lblApproveOutput.setText("No accounts to approve.");
+        }
+    }//GEN-LAST:event_btnApproveActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        if(cbRemovePatient.getSelectedItem() != null){
+            String patientName = cbRemovePatient.getSelectedItem().toString();
+
+            for (int i = 0; i < hospital.people.size(); i++) {
+                if (patientName.equals(hospital.people.get(i).getName() + " " + hospital.people.get(i).getSurname())) {
+                    Patient pat = (Patient) hospital.people.get(i);
+                    pat.setRemoveRequest(true);
+                    hospital.people.remove(hospital.people.get(i));
+                }
+            }
+            displayPatientsToRemove();
+        }else{
+            lblRemoveOutput.setText("No accounts to remove");
+        }        
+
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
+        if(cbPatients.getSelectedItem() != null){
+            for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
+                if (currentPatient.getAppointment().get(i).isApprovesd() == false) {
+                    currentPatient.getAppointment().get(i).setApprovesd(true);
+                }
+            }
+            displayPatientsWithAppointments();
+        }else{
+            lblAppointmentsOutput.setText("No appointments to approve");
+        }
+    }//GEN-LAST:event_btnCreateAppointmentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -204,7 +347,6 @@ public class SecretaryHome extends javax.swing.JFrame {
     private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnCreateAppointment;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JComboBox<String> cbAppointments;
     private javax.swing.JComboBox<String> cbApprovePatient;
     private javax.swing.JComboBox<String> cbPatients;
     private javax.swing.JComboBox<String> cbRemovePatient;
@@ -212,8 +354,14 @@ public class SecretaryHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblAppointmentsOutput;
+    private javax.swing.JLabel lblApproveOutput;
+    private javax.swing.JLabel lblRemoveOutput;
+    private javax.swing.JTextArea txtAreaAppointment;
     // End of variables declaration//GEN-END:variables
 }

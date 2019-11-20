@@ -47,6 +47,7 @@ public class AdministratorHome extends javax.swing.JFrame {
         txtAreaFeedback = new javax.swing.JTextArea();
         btnPostFeedback = new javax.swing.JButton();
         btnClose1 = new javax.swing.JButton();
+        lblFeedbackOutput = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -110,6 +111,8 @@ public class AdministratorHome extends javax.swing.JFrame {
             }
         });
 
+        lblFeedbackOutput.setText("jLabel14");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -117,7 +120,10 @@ public class AdministratorHome extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPostFeedback)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnPostFeedback)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFeedbackOutput))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel13)
                         .addComponent(jLabel12)
@@ -149,7 +155,9 @@ public class AdministratorHome extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnPostFeedback)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPostFeedback)
+                    .addComponent(lblFeedbackOutput))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnClose1)
                 .addContainerGap())
@@ -325,6 +333,7 @@ public class AdministratorHome extends javax.swing.JFrame {
     public void onLoad() {
         lblAddOutput.setText("");
         lblRemoveOutput.setText("");
+        lblFeedbackOutput.setText("");
         populateCBs();
         displayDoctorReviews();
     }
@@ -394,7 +403,8 @@ public class AdministratorHome extends javax.swing.JFrame {
     }//GEN-LAST:event_cbRemoveOccupationActionPerformed
 
     private void btnPostFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostFeedbackActionPerformed
-        txtAreaFeedback.getText();
+        currentDoctor.setFeedback(txtAreaFeedback.getText());
+        lblFeedbackOutput.setText("Feedback has been posted");
     }//GEN-LAST:event_btnPostFeedbackActionPerformed
 
     private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
@@ -472,6 +482,7 @@ public class AdministratorHome extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblAddOutput;
+    private javax.swing.JLabel lblFeedbackOutput;
     private javax.swing.JLabel lblRemoveOutput;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextArea txtAreaDoctorReviews;

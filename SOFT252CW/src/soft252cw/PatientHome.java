@@ -491,6 +491,7 @@ public class PatientHome extends javax.swing.JFrame {
         cal.set(year, month, day, hour, mins,0);
 
         Appointment appointment = new Appointment(cal.getTime(), currentDoctor.getSurname() + " " + currentDoctor.getSurname(), false);
+        currentPatient.setAppointment(appointment);
     }//GEN-LAST:event_btnRequestAppointmentActionPerformed
 
     private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed

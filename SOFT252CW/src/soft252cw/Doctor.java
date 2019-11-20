@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Doctor extends HospitalPerson {
 
+    private String feedback;
     private ArrayList<Review> review;
 
     public Doctor() {
@@ -20,9 +21,18 @@ public class Doctor extends HospitalPerson {
     
     public Doctor(String name, String surname, String address, String id, String password) {
         super(name, surname, address, id, password);
+        feedback = "";
         review = new ArrayList<>();
     }
 
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
+    } 
+    
     public ArrayList<Review> getReview() {
         return review;
     }
