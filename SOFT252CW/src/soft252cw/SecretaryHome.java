@@ -14,50 +14,50 @@ public class SecretaryHome extends javax.swing.JFrame {
     /**
      * Creates new form SecretaryHome
      */
-    
     public Hospital hospital;
     public Patient currentPatient;
     public MedicineStock medStock;
-    
-    public SecretaryHome(Hospital hospital ,MedicineStock medStock) {
+
+    public SecretaryHome(Hospital hospital, MedicineStock medStock) {
         initComponents();
         this.hospital = hospital;
         this.medStock = medStock;
     }
-    
-    public void onLoad(){   
-        
-        Prescription pre = new Prescription(medStock.medicine.get(3),10 ,"all day ", false);
-        Patient pat = (Patient)hospital.people.get(5);
-        
+
+    public void onLoad() {
+
+        Prescription pre = new Prescription(medStock.medicine.get(3), 10, "all day ", false);
+        Patient pat = (Patient) hospital.people.get(5);
+
         pat.setPrescription(pre);
-              
+
+        lblPrescriptionOutput.setText("");
+        lblMedicineOutput.setText("");
         lblApproveOutput.setText("");
         lblRemoveOutput.setText("");
         lblAppointmentsOutput.setText("");
-         displayPatientsToApprove();
-         displayPatientsToRemove();
-         displayPatientsWithAppointments();
-         displayPatientsWithPrescriptions();
-         displayMedicineToRestock();
+        displayPatientsToApprove();
+        displayPatientsToRemove();
+        displayPatientsWithAppointments();
+        displayPatientsWithPrescriptions();
+        displayMedicineToRestock();
     }
-    
-    public void displayPatientsToApprove(){
+
+    public void displayPatientsToApprove() {
         cbApprovePatient.removeAllItems();
         for (HospitalPerson person : hospital.people) {
             if (person.getID().charAt(0) == 'P') {
                 Patient pat = (Patient) person;
                 if (pat.isApproved() == false) {
-                    cbApprovePatient.addItem(pat.getName()+ " "+ pat.getSurname());
+                    cbApprovePatient.addItem(pat.getName() + " " + pat.getSurname());
                 }
             }
         }
     }
- 
+
     public void displayPatientsToRemove() {
-        cbRemovePatient.removeAllItems();    
-        
-        
+        cbRemovePatient.removeAllItems();
+
         for (HospitalPerson person : hospital.people) {
             if (person.getID().charAt(0) == 'P') {
                 Patient pat = (Patient) person;
@@ -67,45 +67,46 @@ public class SecretaryHome extends javax.swing.JFrame {
             }
         }
     }
-    
-    public void displayPatientsWithPrescriptions(){
+
+    public void displayPatientsWithPrescriptions() {
         cbPatientsPrescription.removeAllItems();
-        
+
         for (HospitalPerson person : hospital.people) {
             if (person.getID().charAt(0) == 'P') {
                 Patient pat = (Patient) person;
-                if (pat.getPrescription()!= null && pat.getPrescription().isHandedOut() == false) {
+                if (pat.getPrescription() != null && pat.getPrescription().isHandedOut() == false) {
                     cbPatientsPrescription.addItem(pat.getName() + " " + pat.getSurname());
                 }
             }
         }
-           displayPrescriptions();
+        displayPrescriptions();
     }
-    
-    public void displayPrescriptions(){
+
+    public void displayPrescriptions() {
         txtAreaPrescrpitions.setText("");
-        if(cbPatientsPrescription.getSelectedItem()!=null){
+        if (cbPatientsPrescription.getSelectedItem() != null) {
             getCurrentPatient(cbPatientsPrescription.getSelectedItem().toString());
 
             if (currentPatient.getPrescription() != null) {
                 txtAreaPrescrpitions.setText("Medicine : " + currentPatient.getPrescription().getMedicine().getName() + "\n"
                         + "Quantity : " + currentPatient.getPrescription().getQuantity() + "\n"
                         + "Dosage : " + currentPatient.getPrescription().getDosage());
-            } 
+            }
+        } else {
+            lblPrescriptionOutput.setText("There are no prescriptions to handout.");
         }
     }
-    
-    public void displayMedicineToRestock(){
-        
-        for(int i=0;i < medStock.medicine.size();i++){
-            if (medStock.medicine.get(i).getStock()<100){
-                txtAreaMedicine.append(medStock.medicine.get(i).getName()+" has a stock of : "
-                        + medStock.medicine.get(i).getStock()+" and needs to be restocked.\n");
+
+    public void displayMedicineToRestock() {
+        txtAreaMedicine.setText("");
+        for (int i = 0; i < medStock.medicine.size(); i++) {
+            if (medStock.medicine.get(i).getStock() < 100) {
+                txtAreaMedicine.append(medStock.medicine.get(i).getName() + " has a stock of "
+                        + medStock.medicine.get(i).getStock() + " and needs to be restocked.\n");
             }
-        }    
+        }
     }
-    
-    
+
     public void displayPatientsWithAppointments() {
         cbPatientsAppointments.removeAllItems();
 
@@ -125,12 +126,12 @@ public class SecretaryHome extends javax.swing.JFrame {
                 }
             }
         }
-           displayAppointmentsToCreate();
+        displayAppointmentsToCreate();
     }
 
     public void displayAppointmentsToCreate() {
         txtAreaAppointment.setText("");
-        if(cbPatientsAppointments.getSelectedItem()!=null){
+        if (cbPatientsAppointments.getSelectedItem() != null) {
             getCurrentPatient(cbPatientsAppointments.getSelectedItem().toString());
 
             for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
@@ -154,8 +155,7 @@ public class SecretaryHome extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,6 +196,8 @@ public class SecretaryHome extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAreaMedicine = new javax.swing.JTextArea();
         btnRestock = new javax.swing.JButton();
+        lblMedicineOutput = new javax.swing.JLabel();
+        lblPrescriptionOutput = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -356,6 +358,15 @@ public class SecretaryHome extends javax.swing.JFrame {
         jScrollPane3.setViewportView(txtAreaMedicine);
 
         btnRestock.setText("Restock");
+        btnRestock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestockActionPerformed(evt);
+            }
+        });
+
+        lblMedicineOutput.setText("jLabel9");
+
+        lblPrescriptionOutput.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -372,15 +383,19 @@ public class SecretaryHome extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRestock)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(cbPatientsPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(btnHandOut))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnRestock)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMedicineOutput))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cbPatientsPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnHandOut)
+                        .addGap(33, 33, 33)
+                        .addComponent(lblPrescriptionOutput))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +404,8 @@ public class SecretaryHome extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cbPatientsPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHandOut))
+                    .addComponent(btnHandOut)
+                    .addComponent(lblPrescriptionOutput))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
@@ -397,7 +413,9 @@ public class SecretaryHome extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnRestock)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRestock)
+                    .addComponent(lblMedicineOutput))
                 .addGap(9, 9, 9)
                 .addComponent(btnClose1)
                 .addContainerGap())
@@ -428,7 +446,7 @@ public class SecretaryHome extends javax.swing.JFrame {
                     displayAppointmentsToCreate();
                 }
             }
-        }     
+        }
     }//GEN-LAST:event_cbPatientsAppointmentsActionPerformed
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
@@ -442,13 +460,13 @@ public class SecretaryHome extends javax.swing.JFrame {
                 }
             }
             displayPatientsToApprove();
-        }else{
+        } else {
             lblApproveOutput.setText("No accounts to approve.");
         }
     }//GEN-LAST:event_btnApproveActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        if(cbRemovePatient.getSelectedItem() != null){
+        if (cbRemovePatient.getSelectedItem() != null) {
             String patientName = cbRemovePatient.getSelectedItem().toString();
 
             for (int i = 0; i < hospital.people.size(); i++) {
@@ -459,38 +477,40 @@ public class SecretaryHome extends javax.swing.JFrame {
                 }
             }
             displayPatientsToRemove();
-        }else{
+        } else {
             lblRemoveOutput.setText("No accounts to remove");
-        }        
+        }
 
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
-        if(cbPatientsAppointments.getSelectedItem() != null){
+        if (cbPatientsAppointments.getSelectedItem() != null) {
             for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
                 if (currentPatient.getAppointment().get(i).isApprovesd() == false) {
                     currentPatient.getAppointment().get(i).setApprovesd(true);
                 }
             }
             displayPatientsWithAppointments();
-        }else{
+        } else {
             lblAppointmentsOutput.setText("No appointments to approve");
         }
     }//GEN-LAST:event_btnCreateAppointmentActionPerformed
 
     private void btnHandOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandOutActionPerformed
-        getCurrentPatient(cbPatientsPrescription.getSelectedItem().toString());
+        if (cbPatientsPrescription.getSelectedItem() != null) {
+            getCurrentPatient(cbPatientsPrescription.getSelectedItem().toString());
 
-        currentPatient.getPrescription().setHandedOut(true);
+            currentPatient.getPrescription().setHandedOut(true);
 
-        for (int i = 0; i < medStock.medicine.size(); i++) {
+            for (int i = 0; i < medStock.medicine.size(); i++) {
 
-            if (currentPatient.getPrescription().getMedicine().equals(medStock.medicine.get(i))) {
-                medStock.medicine.get(i).setStock(medStock.medicine.get(i).getStock()
-                        - currentPatient.getPrescription().getQuantity());
+                if (currentPatient.getPrescription().getMedicine().equals(medStock.medicine.get(i))) {
+                    medStock.medicine.get(i).setStock(medStock.medicine.get(i).getStock()
+                            - currentPatient.getPrescription().getQuantity());
+                }
             }
+            displayPatientsWithPrescriptions();
         }
-        displayPatientsWithPrescriptions();
     }//GEN-LAST:event_btnHandOutActionPerformed
 
     private void btnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose2ActionPerformed
@@ -500,7 +520,17 @@ public class SecretaryHome extends javax.swing.JFrame {
     private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
         exitPage();
     }//GEN-LAST:event_btnClose1ActionPerformed
-    
+
+    private void btnRestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestockActionPerformed
+        for (int i = 0; i < medStock.medicine.size(); i++) {
+            if (medStock.medicine.get(i).getStock() < 100) {
+                medStock.medicine.get(i).setStock(100);
+            }
+        }
+        lblMedicineOutput.setText("Order for Medicine has been placed.");
+        displayMedicineToRestock();
+    }//GEN-LAST:event_btnRestockActionPerformed
+
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
@@ -540,6 +570,8 @@ public class SecretaryHome extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAppointmentsOutput;
     private javax.swing.JLabel lblApproveOutput;
+    private javax.swing.JLabel lblMedicineOutput;
+    private javax.swing.JLabel lblPrescriptionOutput;
     private javax.swing.JLabel lblRemoveOutput;
     private javax.swing.JTextArea txtAreaAppointment;
     private javax.swing.JTextArea txtAreaMedicine;
