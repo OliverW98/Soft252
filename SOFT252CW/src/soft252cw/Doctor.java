@@ -56,10 +56,6 @@ public class Doctor extends HospitalPerson {
     
     public void prescribeMedicine(Patient patient){
 
-    }
-    
-    public void createMedicines(){
-               
-    }
+    }   
 
 }

@@ -24,7 +24,4 @@ public class Administrator extends HospitalPerson {
 
    }
    
-   public void ProvideFeebackToDoctor(){
-       
-   }
 }

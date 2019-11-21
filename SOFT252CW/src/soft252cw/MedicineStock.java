@@ -20,10 +20,10 @@ public class MedicineStock {
         Medicine med2 = new Medicine("name2",100);
         Medicine med3 = new Medicine("name3",100);
         Medicine med4 = new Medicine("name4",100);
-        Medicine med5 = new Medicine("name5",80);
+        Medicine med5 = new Medicine("name5",100);
         Medicine med6 = new Medicine("name6",100);
         Medicine med7 = new Medicine("name7",100);
-        Medicine med8 = new Medicine("name8",10);
+        Medicine med8 = new Medicine("name8",100);
         Medicine med9 = new Medicine("name9",100);
         Medicine med10 = new Medicine("name10",100);
         

@@ -19,11 +19,13 @@ public class DoctorHome extends javax.swing.JFrame {
      */
     public Doctor currentDoctor;
     public Hospital hospital;
+    public MedicineStock medStock;
     
-    public DoctorHome(Doctor doctor, Hospital hospital) {
+    public DoctorHome(Doctor doctor, Hospital hospital, MedicineStock medStock) {
         initComponents();
         this.currentDoctor = doctor;
         this.hospital = hospital;
+        this.medStock = medStock; 
     }
     
     public void onLoad(){
@@ -42,6 +44,7 @@ public class DoctorHome extends javax.swing.JFrame {
         Patient pat2 = (Patient) hospital.people.get(6);
         pat2.setAppointment(appointmen2);
         
+        lblCreateMedicineOutput.setText("");
         loadDoctorAppointments();
     }
     
@@ -84,6 +87,10 @@ public class DoctorHome extends javax.swing.JFrame {
         btnClose2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btnClose3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtMedicineName = new javax.swing.JTextField();
+        btnCreateMedicine = new javax.swing.JButton();
+        lblCreateMedicineOutput = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +169,17 @@ public class DoctorHome extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Medicine Name :");
+
+        btnCreateMedicine.setText("Create Medicine");
+        btnCreateMedicine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateMedicineActionPerformed(evt);
+            }
+        });
+
+        lblCreateMedicineOutput.setText("lblCreateMedicineOutput");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -170,11 +188,31 @@ public class DoctorHome extends javax.swing.JFrame {
                 .addContainerGap(676, Short.MAX_VALUE)
                 .addComponent(btnClose3)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnCreateMedicine)
+                        .addGap(30, 30, 30)
+                        .addComponent(lblCreateMedicineOutput))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMedicineName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(388, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtMedicineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreateMedicine)
+                    .addComponent(lblCreateMedicineOutput))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                 .addComponent(btnClose3)
                 .addContainerGap())
         );
@@ -207,11 +245,25 @@ public class DoctorHome extends javax.swing.JFrame {
         exitPage();
     }//GEN-LAST:event_btnClose3ActionPerformed
 
+    private void btnCreateMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateMedicineActionPerformed
+        
+        if(!"".equals(txtMedicineName.getText())){
+        Medicine medicine = new Medicine(txtMedicineName.getText(),0);
+        
+        medStock.medicine.add(medicine);
+        
+        lblCreateMedicineOutput.setText("Medicine has been created and needs to be ordered.");
+        }else{
+            lblCreateMedicineOutput.setText("Please enter a name.");
+        }
+    }//GEN-LAST:event_btnCreateMedicineActionPerformed
+
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
         tempLogIn.setVisible(true);
         tempLogIn.updateHospital(hospital);
+        tempLogIn.updateMedicineStock(medStock);
     }
     
     /**
@@ -223,12 +275,16 @@ public class DoctorHome extends javax.swing.JFrame {
     private javax.swing.JButton btnClose1;
     private javax.swing.JButton btnClose2;
     private javax.swing.JButton btnClose3;
+    private javax.swing.JButton btnCreateMedicine;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblCreateMedicineOutput;
     private javax.swing.JTextArea txtAreaAppointments;
+    private javax.swing.JTextField txtMedicineName;
     // End of variables declaration//GEN-END:variables
 }

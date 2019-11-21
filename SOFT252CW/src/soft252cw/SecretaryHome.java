@@ -25,12 +25,6 @@ public class SecretaryHome extends javax.swing.JFrame {
     }
 
     public void onLoad() {
-
-        Prescription pre = new Prescription(medStock.medicine.get(3), 10, "all day ", false);
-        Patient pat = (Patient) hospital.people.get(5);
-
-        pat.setPrescription(pre);
-
         lblPrescriptionOutput.setText("");
         lblMedicineOutput.setText("");
         lblApproveOutput.setText("");
@@ -92,9 +86,7 @@ public class SecretaryHome extends javax.swing.JFrame {
                         + "Quantity : " + currentPatient.getPrescription().getQuantity() + "\n"
                         + "Dosage : " + currentPatient.getPrescription().getDosage());
             }
-        } else {
-            lblPrescriptionOutput.setText("There are no prescriptions to handout.");
-        }
+        } 
     }
 
     public void displayMedicineToRestock() {
@@ -110,15 +102,11 @@ public class SecretaryHome extends javax.swing.JFrame {
     public void displayPatientsWithAppointments() {
         cbPatientsAppointments.removeAllItems();
 
-        System.out.println("Here ");
         for (HospitalPerson person : hospital.people) {
             if (person.getID().charAt(0) == 'P') {
-                System.out.println("Here 1");
                 Patient pat = (Patient) person;
                 for (int i = 0; i < pat.getAppointment().size(); i++) {
-                    System.out.println("Here 2");
                     if (pat.getAppointment().get(i).isApprovesd() == false) {
-                        System.out.println("Here 3");
                         cbPatientsAppointments.addItem(person.getName() + " " + person.getSurname());
 
                         // a name is added twice if have two appointments to approve.
@@ -510,6 +498,8 @@ public class SecretaryHome extends javax.swing.JFrame {
                 }
             }
             displayPatientsWithPrescriptions();
+        }else{
+            lblPrescriptionOutput.setText("There are no prescriptions to handout.");
         }
     }//GEN-LAST:event_btnHandOutActionPerformed
 

@@ -145,7 +145,7 @@ public class LogIn extends javax.swing.JFrame {
             tempSecretaryHome.setVisible(true);
             tempSecretaryHome.onLoad();
         }  else if(_item.getID().substring(0, 1).equals("D") && uniqueid == true && password == true){
-            DoctorHome tempDoctorHome = new DoctorHome((Doctor)_item, hospital);
+            DoctorHome tempDoctorHome = new DoctorHome((Doctor)_item, hospital,medStock);
             tempDoctorHome.setVisible(true);
             tempDoctorHome.onLoad();
         }   else if(_item.getID().substring(0, 1).equals("P") && uniqueid == true &&password == true){

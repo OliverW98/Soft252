@@ -17,11 +17,4 @@ public class Secretary extends HospitalPerson {
     public Secretary(String name, String surname, String address, String id, String password) {
         super(name, surname, address, id, password);
     }
-
-    
-    public void orderMedicine(){
-        
-    }
-
-    
 }
