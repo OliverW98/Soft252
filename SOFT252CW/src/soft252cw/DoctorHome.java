@@ -46,7 +46,9 @@ public class DoctorHome extends javax.swing.JFrame {
         Patient pat2 = (Patient) hospital.people.get(6);
         pat2.setAppointment(appointmen2);
 
-        currentPatient = (Patient) hospital.people.get(7);
+        currentPatient = (Patient) hospital.people.get(7); // figure out way to selcet patient.
+        
+        
         lblCreateMedicineOutput.setText("");
         lblAppointmentOutput.setText("");
         lblNotesOutput.setText("");

@@ -41,21 +41,4 @@ public class Doctor extends HospitalPerson {
         this.review.add(review);
     }
 
-
-    public void makeNotes(){
-        
-    }
-    
-    public void viewPaitentHistory(){
-        
-    }
-    
-    public void createFutureAppointment(){
-        
-    }
-    
-    public void prescribeMedicine(Patient patient){
-
-    }   
-
 }

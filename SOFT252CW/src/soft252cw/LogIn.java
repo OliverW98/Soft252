@@ -49,6 +49,7 @@ public class LogIn extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         lblOutput = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
+        btnCreateAdminAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +75,13 @@ public class LogIn extends javax.swing.JFrame {
 
         lblOutput.setText("output");
 
+        btnCreateAdminAccount.setText("Create Admin Account");
+        btnCreateAdminAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAdminAccountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,7 +94,9 @@ public class LogIn extends javax.swing.JFrame {
                             .addComponent(btnLogin)
                             .addComponent(lblOutput))
                         .addGap(47, 47, 47)
-                        .addComponent(btnRequestAccount))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRequestAccount)
+                            .addComponent(btnCreateAdminAccount)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -98,7 +108,7 @@ public class LogIn extends javax.swing.JFrame {
                                 .addComponent(lblPassword)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,8 +126,10 @@ public class LogIn extends javax.swing.JFrame {
                     .addComponent(btnLogin)
                     .addComponent(btnRequestAccount))
                 .addGap(18, 18, 18)
-                .addComponent(lblOutput)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblOutput)
+                    .addComponent(btnCreateAdminAccount))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,12 +170,20 @@ public class LogIn extends javax.swing.JFrame {
         });
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnCreateAdminAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAdminAccountActionPerformed
+         this.setVisible(false);
+        CreateAdminAccount tempCreateAdminAccount = new CreateAdminAccount(hospital);
+        tempCreateAdminAccount.setVisible(true);
+        tempCreateAdminAccount.onLoad(); 
+    }//GEN-LAST:event_btnCreateAdminAccountActionPerformed
    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateAdminAccount;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRequestAccount;
     private javax.swing.JLabel lblOutput;

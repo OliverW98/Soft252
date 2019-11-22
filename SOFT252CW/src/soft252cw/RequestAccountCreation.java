@@ -188,6 +188,7 @@ public class RequestAccountCreation extends javax.swing.JFrame {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
         tempLogIn.setVisible(true);
+        tempLogIn.updateHospital(hospital);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
