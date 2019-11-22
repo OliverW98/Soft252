@@ -25,10 +25,6 @@ public class HospitalPerson {
         this.password = password;
     }
 
-    public HospitalPerson() {
-        this("", "", "", "","");
-    }
-
     public String getName() {
         return name;
     }

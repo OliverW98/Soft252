@@ -13,9 +13,6 @@ import java.util.Random;
  */
 public class AdministratorHome extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdministratorHome
-     */
     private Hospital hospital;
     private Doctor currentDoctor;
 
@@ -338,7 +335,15 @@ public class AdministratorHome extends javax.swing.JFrame {
         displayDoctorReviews();
     }
 
-
+    /**
+     * Add either a Doctor or Secretary to the ArrayList
+     * <p>
+     * the admin enters the name , surname , address and password for the new person.
+     * the id is randomly generated. all this data is added to a new doctor or secretary 
+     * and then they are added to the ArrayList.
+     * </p>
+     * @param evt 
+     */
     private void btnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonActionPerformed
         Random rand = new Random();
         String id = Integer.toString(rand.nextInt(9000)+1000);
@@ -359,9 +364,11 @@ public class AdministratorHome extends javax.swing.JFrame {
             lblAddOutput.setText("Please fill in TextBoxes");
         }
         populateCBs();
-        // LogIn.updateHospital(this.hospital);
     }//GEN-LAST:event_btnAddPersonActionPerformed
 
+    /**
+     * goes through hospital ArrayList and fills the comboBox with doctors and secretaries.
+     */
     public void populateCBs() {
         cbRemovePerson.removeAllItems();
         cbSelectDoctor.removeAllItems();
@@ -377,7 +384,11 @@ public class AdministratorHome extends javax.swing.JFrame {
         }
 
     }
-
+    
+    /**
+     * removes the selected person from the hospital ArrayList.
+     * @param evt 
+     */
     private void btnRemovePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovePersonActionPerformed
         String selectedPerson = (String) cbRemovePerson.getSelectedItem();
 
@@ -389,7 +400,12 @@ public class AdministratorHome extends javax.swing.JFrame {
         populateCBs();
         lblRemoveOutput.setText(selectedPerson + " has been removed.");
     }//GEN-LAST:event_btnRemovePersonActionPerformed
-
+    
+    
+    /**
+     * when a new doctor is selected call the method to display their reviews.
+     * @param evt 
+     */
     private void cbSelectDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelectDoctorActionPerformed
         if (cbSelectDoctor.getSelectedItem() == null) {
             System.out.println("oopsie");
@@ -398,10 +414,14 @@ public class AdministratorHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbSelectDoctorActionPerformed
 
+    
     private void cbRemoveOccupationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRemoveOccupationActionPerformed
         populateCBs();
     }//GEN-LAST:event_cbRemoveOccupationActionPerformed
-
+    /**
+     * Post the feedback the admin has written about the selected doctor.
+     * @param evt 
+     */
     private void btnPostFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostFeedbackActionPerformed
         currentDoctor.setFeedback(txtAreaFeedback.getText());
         lblFeedbackOutput.setText("Feedback has been posted");
@@ -415,6 +435,9 @@ public class AdministratorHome extends javax.swing.JFrame {
         exitPage();
     }//GEN-LAST:event_btnClose2ActionPerformed
 
+    /**
+     * close the current page and sends the updated hospital ArrayList to the log in page.
+     */
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
@@ -422,6 +445,9 @@ public class AdministratorHome extends javax.swing.JFrame {
         tempLogIn.updateHospital(hospital);
     }
     
+    /**
+     * loads the selected doctors reviews into the text area.
+     */
     public void displayDoctorReviews() {
         txtAreaDoctorReviews.setText("");
         
@@ -434,6 +460,11 @@ public class AdministratorHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * get the name of the doctor from the comboBox and and search the hospital ArrayList 
+     * for the doctor that matches the name.
+     * @param selectedDoctor 
+     */
     public void getCurrentDoctor(String selectedDoctor) {
         String DoctorName = selectedDoctor;
 

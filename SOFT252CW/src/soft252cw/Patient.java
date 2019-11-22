@@ -17,12 +17,10 @@ public class Patient extends HospitalPerson {
     private String gender;
     private String notes;
     private Prescription prescription;
-    ArrayList<Appointment> appointment;
+    private ArrayList<Appointment> appointment;
     private boolean approved;
     private boolean removeRequest;
 
-    public Patient() {
-    }
 
     public Patient(String name, String surname, String address, String id, String password, int age, String gender, boolean approved, boolean removeRequest ) {
         super(name, surname, address, id, password);
@@ -94,40 +92,4 @@ public class Patient extends HospitalPerson {
     public void setRemoveRequest(boolean removeRequest) {
         this.removeRequest = removeRequest;
     }
-
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Patient other = (Patient) obj;
-        if (!this.id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" + "age=" + age + ", gender=" + gender + ", notes=" + notes + ", prescription=" + prescription + '}';
-    }
-
-    Object append() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -14,9 +14,6 @@ import java.util.Date;
  */
 public class PatientHome extends javax.swing.JFrame {
 
-    /*
-     * Creates new form PatientHome
-     */
     private Patient currentPatient;
     private Hospital hospital;
     private Doctor currentDoctor;
@@ -411,7 +408,7 @@ public class PatientHome extends javax.swing.JFrame {
         populateDoctorCBs(); 
         displayPatientsAppointments();
         displayDoctorReview();
-        dispalyPatientPerscription();
+        dispalyPatientPrescription();
         dispalyPatientHistory();
         lblViewDoctorOutput.setText("");
         lblRemoveOutput.setText("");
@@ -421,6 +418,9 @@ public class PatientHome extends javax.swing.JFrame {
         displayDoctorReview();
     }//GEN-LAST:event_cbViewDoctorItemStateChanged
 
+     /**
+     * loads the selected doctors reviews into the text area.
+     */
     public void displayDoctorReview() {
         txtAreaDoctorReviews.setText("");
 
@@ -433,6 +433,11 @@ public class PatientHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * get the name of the doctor from the comboBox and and search the hospital ArrayList 
+     * for the doctor that matches the name.
+     * @param selectedDoctor 
+     */
     public void getCurrentDoctor(String selectedDoctor) {
         String DoctorName = selectedDoctor;
 
@@ -448,6 +453,15 @@ public class PatientHome extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * post review to doctor
+     * <p>
+     * takes the text from the text area and the number from the comboBox 
+     * and creates a new review. This review is the added to the selected doctors
+     * account.
+     * </p>
+     * @param evt 
+     */
     private void btnPostReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostReviewActionPerformed
 
         String stringRating = (String) cbDoctorStarRating.getSelectedItem();
@@ -477,6 +491,16 @@ public class PatientHome extends javax.swing.JFrame {
         txtAreaDoctorWritenReview.setText("");
     }//GEN-LAST:event_btnPostReviewActionPerformed
 
+    /**
+     * Request an appointment with a doctor
+     * <p>
+     * the year ,month , day , hour and minutes are taken from the comboBoxs and 
+     * a new calendar date is created. A new appointment is created with the calendar 
+     * date and doctor name with the approved variable set to false.
+     * this appointment is then added to the current patient.
+     * </p>
+     * @param evt 
+     */
     private void btnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAppointmentActionPerformed
         getCurrentDoctor(cbRequestDoctor.getSelectedItem().toString());
 
@@ -511,6 +535,9 @@ public class PatientHome extends javax.swing.JFrame {
         lblRemoveOutput.setText("You Request has been sent");
     }//GEN-LAST:event_btnTerminationActionPerformed
 
+    /**
+     * close the current page and sends the updated hospital ArrayList to the log in page.
+     */
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
@@ -518,6 +545,10 @@ public class PatientHome extends javax.swing.JFrame {
         tempLogIn.updateHospital(hospital);
     }
     
+    
+    /**
+     * goes through hospital ArrayList and fills the comboBox with doctors.
+     */
     public void populateDoctorCBs() {       
         hospital.people.forEach((_item) -> {
             if (_item.getID().substring(0, 1).equals("D")) {
@@ -528,6 +559,10 @@ public class PatientHome extends javax.swing.JFrame {
         this.currentDoctor = (Doctor) hospital.people.get(2);
     }
 
+    /**
+     * goes through the ArrayList of a patient and added appointments to a text area
+     * that are after today's date.
+     */
     public void dispalyPatientHistory() {
 
         Date date = new Date();
@@ -541,7 +576,10 @@ public class PatientHome extends javax.swing.JFrame {
         }
     }
 
-    public void dispalyPatientPerscription() {
+    /**
+     * displays the prescription of the current patient
+     */
+    public void dispalyPatientPrescription() {
         if(currentPatient.getPrescription() != null){
                     txtAreaPerscription.setText("Medicine : " + currentPatient.getPrescription().getMedicine().getName() + "\n"
                 + "Quantity : " + currentPatient.getPrescription().getQuantity() + "\n"
@@ -549,6 +587,9 @@ public class PatientHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * display appointments for the patient that are after today's date.
+     */
     public void displayPatientsAppointments() {
         
         Date date = new Date();

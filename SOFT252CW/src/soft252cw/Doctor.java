@@ -16,8 +16,6 @@ public class Doctor extends HospitalPerson {
     private String feedback;
     private ArrayList<Review> review;
 
-    public Doctor() {
-    }
     
     public Doctor(String name, String surname, String address, String id, String password) {
         super(name, surname, address, id, password);

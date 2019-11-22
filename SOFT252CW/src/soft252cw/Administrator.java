@@ -10,18 +10,8 @@ package soft252cw;
  * @author Oliver
  */
 public class Administrator extends HospitalPerson {
-    
-    public Administrator() {
-    }
-    
+
     public Administrator(String name, String surname, String address, String id, String password) {
         super(name, surname, address, id, password);
     }
-    /**
-     * Generate new Ids for accounts
-     */
-   public void CreateAccount(){
-
-   }
-   
 }

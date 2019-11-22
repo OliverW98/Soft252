@@ -43,8 +43,8 @@ public class Appointment {
         return approved;
     }
 
-    public void setApprovesd(boolean approvesd) {
-        this.approved = approvesd;
+    public void setApprovesd(boolean approved) {
+        this.approved = approved;
     }
     
     

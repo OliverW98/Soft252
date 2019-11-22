@@ -11,9 +11,6 @@ package soft252cw;
  */
 public class SecretaryHome extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SecretaryHome
-     */
     public Hospital hospital;
     public Patient currentPatient;
     public MedicineStock medStock;
@@ -37,6 +34,10 @@ public class SecretaryHome extends javax.swing.JFrame {
         displayMedicineToRestock();
     }
 
+    
+    /**
+     * loads all the patients who have appointments to approve.
+     */
     public void displayPatientsToApprove() {
         cbApprovePatient.removeAllItems();
         for (HospitalPerson person : hospital.people) {
@@ -49,6 +50,9 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * loads all the patients who have requested to have there account terminated.
+     */
     public void displayPatientsToRemove() {
         cbRemovePatient.removeAllItems();
 
@@ -62,6 +66,9 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * loads all the patients who have prescriptions that are not handed out.
+     */
     public void displayPatientsWithPrescriptions() {
         cbPatientsPrescription.removeAllItems();
 
@@ -76,6 +83,9 @@ public class SecretaryHome extends javax.swing.JFrame {
         displayPrescriptions();
     }
 
+    /**
+     * displays the prescription of the selected patient.
+     */
     public void displayPrescriptions() {
         txtAreaPrescrpitions.setText("");
         if (cbPatientsPrescription.getSelectedItem() != null) {
@@ -89,6 +99,9 @@ public class SecretaryHome extends javax.swing.JFrame {
         } 
     }
 
+    /**
+     * displays all the medicine that needs to be restocked.
+     */
     public void displayMedicineToRestock() {
         txtAreaMedicine.setText("");
         for (int i = 0; i < medStock.medicine.size(); i++) {
@@ -99,6 +112,9 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * loads the name of patients  that have appointments that need approving.
+     */
     public void displayPatientsWithAppointments() {
         cbPatientsAppointments.removeAllItems();
 
@@ -117,6 +133,9 @@ public class SecretaryHome extends javax.swing.JFrame {
         displayAppointmentsToCreate();
     }
 
+    /**
+     * displays all the appointments that have been requested by a patient.
+     */
     public void displayAppointmentsToCreate() {
         txtAreaAppointment.setText("");
         if (cbPatientsAppointments.getSelectedItem() != null) {
@@ -131,6 +150,11 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * takes in the name of a patient and searches the hospital ArrayList for the 
+     * patient and set the current patient to that patient.
+     * @param selectedPatient 
+     */
     public void getCurrentPatient(String selectedPatient) {
         String PatientName = selectedPatient;
 
@@ -425,6 +449,11 @@ public class SecretaryHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * loads the appointment the patient has purposed when a new patient is
+     * selected in the omboBox.
+     * @param evt 
+     */
     private void cbPatientsAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPatientsAppointmentsActionPerformed
         if (cbPatientsAppointments.getSelectedItem() == null) {
             System.out.println("oopsie");
@@ -437,6 +466,10 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbPatientsAppointmentsActionPerformed
 
+    /**
+     * Approves the appointment the selected patient has purposed.
+     * @param evt 
+     */
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         if (cbApprovePatient.getSelectedItem() != null) {
             String patientName = cbApprovePatient.getSelectedItem().toString();
@@ -453,6 +486,10 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnApproveActionPerformed
 
+    /**
+     * removes the selected patient for the hospital ArrayList.
+     * @param evt 
+     */
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         if (cbRemovePatient.getSelectedItem() != null) {
             String patientName = cbRemovePatient.getSelectedItem().toString();
@@ -471,6 +508,11 @@ public class SecretaryHome extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRemoveActionPerformed
 
+    /**
+     * take the current patients appointments that are not approved and approves
+     *  them.
+     * @param evt 
+     */
     private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
         if (cbPatientsAppointments.getSelectedItem() != null) {
             for (int i = 0; i < currentPatient.getAppointment().size(); i++) {
@@ -484,6 +526,16 @@ public class SecretaryHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCreateAppointmentActionPerformed
 
+    /**
+     * hands out prescription to patient
+     * <p>
+     * get the selected patient and set them to the current patient. then hands the 
+     * prescription out to the patient and set handedOut variable to true.
+     * the quantity for the prescription is then deduced for the total stock of 
+     * medicine.
+     * </p>
+     * @param evt 
+     */
     private void btnHandOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandOutActionPerformed
         if (cbPatientsPrescription.getSelectedItem() != null) {
             getCurrentPatient(cbPatientsPrescription.getSelectedItem().toString());
@@ -521,6 +573,10 @@ public class SecretaryHome extends javax.swing.JFrame {
         displayMedicineToRestock();
     }//GEN-LAST:event_btnRestockActionPerformed
 
+     /**
+     * close the current page and sends the updated hospital ArrayList
+     *  and updated medStock ArrayList to the log in page.
+     */
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();

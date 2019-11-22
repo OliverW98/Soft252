@@ -11,10 +11,6 @@ package soft252cw;
  */
 public class LogIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LogIn
-     */
-    
     public Hospital hospital;
     public MedicineStock medStock;
     
@@ -24,11 +20,18 @@ public class LogIn extends javax.swing.JFrame {
         hospital = new Hospital();
         medStock = new MedicineStock();
     }
-    
+    /**
+     * Updates the ArrayList hospital with the one being passed in.
+     * @param hospital 
+     */  
     public void updateHospital(Hospital hospital){
         this.hospital = hospital;
     }
     
+    /**
+     * Updates the ArrayList medStock with the one being passed in.
+     * @param medStock 
+     */    
     public void updateMedicineStock(MedicineStock medStock){
         this.medStock = medStock;
     }
@@ -135,13 +138,25 @@ public class LogIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Creates a new RequestAccountCreation page and passes in the ArrayList of hospital.
+     * @param evt 
+     */   
     private void btnRequestAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAccountActionPerformed
         this.setVisible(false);
         RequestAccountCreation tempRequestAccountCreation = new RequestAccountCreation(hospital);
         tempRequestAccountCreation.setVisible(true);
         tempRequestAccountCreation.onLoad(); 
     }//GEN-LAST:event_btnRequestAccountActionPerformed
-
+    
+    /**
+     * log in system
+     * <p>
+     * the user enters a unique id and a password. if the two parameters match 
+     * details in the ArrayList then the user is sent to corresponding home page.
+     * </P>
+     * @param evt 
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         hospital.people.forEach((_item) -> {
             
@@ -170,7 +185,11 @@ public class LogIn extends javax.swing.JFrame {
         });
 
     }//GEN-LAST:event_btnLoginActionPerformed
-
+    
+    /**
+     * Creates a new CreateAdminAccount page and passes in the ArrayList of hospital.
+     * @param evt 
+     */ 
     private void btnCreateAdminAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAdminAccountActionPerformed
          this.setVisible(false);
         CreateAdminAccount tempCreateAdminAccount = new CreateAdminAccount(hospital);
