@@ -34,8 +34,5 @@ public class Medicine {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
-    
-    
-    
+  
 }

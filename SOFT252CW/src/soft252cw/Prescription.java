@@ -54,9 +54,5 @@ public class Prescription {
 
     public void setHandedOut(boolean handedOut) {
         this.handedOut = handedOut;
-    }
-
-    
-    
-    
+    }  
 }

@@ -46,10 +46,5 @@ public class Appointment {
     public void setApprovesd(boolean approved) {
         this.approved = approved;
     }
-    
-    
-    
-    
-    
-    
+  
 }

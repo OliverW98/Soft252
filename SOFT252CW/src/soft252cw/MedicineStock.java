@@ -16,16 +16,16 @@ public class MedicineStock {
 
     public MedicineStock() {
         medicine = new ArrayList<>();
-        Medicine med1 = new Medicine("name1",100);
-        Medicine med2 = new Medicine("name2",100);
-        Medicine med3 = new Medicine("name3",100);
-        Medicine med4 = new Medicine("name4",100);
-        Medicine med5 = new Medicine("name5",100);
-        Medicine med6 = new Medicine("name6",100);
-        Medicine med7 = new Medicine("name7",100);
-        Medicine med8 = new Medicine("name8",100);
-        Medicine med9 = new Medicine("name9",100);
-        Medicine med10 = new Medicine("name10",100);
+        Medicine med1 = new Medicine("HappyPills",100);
+        Medicine med2 = new Medicine("HeadAcheAway",100);
+        Medicine med3 = new Medicine("Moorfenn",100);
+        Medicine med4 = new Medicine("Caferate",100);
+        Medicine med5 = new Medicine("Nitrorudin",100);
+        Medicine med6 = new Medicine("Chlornase",100);
+        Medicine med7 = new Medicine("Trangen",100);
+        Medicine med8 = new Medicine("Prefen",100);
+        Medicine med9 = new Medicine("Ultrinate",100);
+        Medicine med10 = new Medicine("Oxyconovate",100);
         
         medicine.add(med1);
         medicine.add(med2);

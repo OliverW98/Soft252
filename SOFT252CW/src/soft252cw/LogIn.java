@@ -184,7 +184,6 @@ public class LogIn extends javax.swing.JFrame {
             lblOutput.setText("Please Enter Vaild ID and Password");     
         }
         });
-
     }//GEN-LAST:event_btnLoginActionPerformed
     
     /**
