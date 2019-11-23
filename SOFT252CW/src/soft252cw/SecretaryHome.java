@@ -153,7 +153,7 @@ public class SecretaryHome extends javax.swing.JFrame {
     /**
      * takes in the name of a patient and searches the hospital ArrayList for the 
      * patient and set the current patient to that patient.
-     * @param selectedPatient 
+     * @param selectedPatient a String of the selected patients name.
      */
     public void getCurrentPatient(String selectedPatient) {
         String PatientName = selectedPatient;
@@ -253,6 +253,7 @@ public class SecretaryHome extends javax.swing.JFrame {
         jLabel5.setText("Requested Appointments:");
 
         txtAreaAppointment.setColumns(20);
+        txtAreaAppointment.setLineWrap(true);
         txtAreaAppointment.setRows(5);
         jScrollPane1.setViewportView(txtAreaAppointment);
 
@@ -262,7 +263,7 @@ public class SecretaryHome extends javax.swing.JFrame {
 
         lblAppointmentsOutput.setText("jLabel6");
 
-        btnClose2.setText("Close");
+        btnClose2.setText("Log Out");
         btnClose2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose2ActionPerformed(evt);
@@ -346,6 +347,7 @@ public class SecretaryHome extends javax.swing.JFrame {
         jLabel6.setText("Patients with Precscriptions to pickup :");
 
         txtAreaPrescrpitions.setColumns(20);
+        txtAreaPrescrpitions.setLineWrap(true);
         txtAreaPrescrpitions.setRows(5);
         jScrollPane2.setViewportView(txtAreaPrescrpitions);
 
@@ -356,7 +358,7 @@ public class SecretaryHome extends javax.swing.JFrame {
             }
         });
 
-        btnClose1.setText("Close");
+        btnClose1.setText("Log Out");
         btnClose1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose1ActionPerformed(evt);
@@ -366,6 +368,7 @@ public class SecretaryHome extends javax.swing.JFrame {
         jLabel8.setText("Medicine to be restocked :");
 
         txtAreaMedicine.setColumns(20);
+        txtAreaMedicine.setLineWrap(true);
         txtAreaMedicine.setRows(5);
         jScrollPane3.setViewportView(txtAreaMedicine);
 
@@ -584,9 +587,7 @@ public class SecretaryHome extends javax.swing.JFrame {
         tempLogIn.updateHospital(hospital);
         tempLogIn.updateMedicineStock(medStock);
     }
-    /**
-     * @param args the command line arguments
-     */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApprove;

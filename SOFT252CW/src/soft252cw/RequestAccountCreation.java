@@ -14,9 +14,6 @@ import javax.swing.JOptionPane;
  */
 public class RequestAccountCreation extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RequestAccountCreation
-     */
     public Hospital hospital;
 
     public RequestAccountCreation(Hospital hospital) {
@@ -78,7 +75,7 @@ public class RequestAccountCreation extends javax.swing.JFrame {
             }
         });
 
-        btnClose.setText("Close");
+        btnClose.setText("Log Out");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -184,6 +181,10 @@ public class RequestAccountCreation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * takes the user back to the login page and updates the hospital ArrayList.
+     * @param evt 
+     */
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
@@ -191,6 +192,17 @@ public class RequestAccountCreation extends javax.swing.JFrame {
         tempLogIn.updateHospital(hospital);
     }//GEN-LAST:event_btnCloseActionPerformed
 
+     /**
+     * Creates a Request for account creation.
+     * <p>
+     * name , surname , password , address , age and gender are all taken from the text boxes and
+     *  a random 4 digit number is created for the id. This is then used to create
+     *  a new patient account with the approved variable set to false. 
+     * The new account is then a added to the hospital ArrayList.
+     * the user is then redirected back to the login page.
+     * </P>
+     * @param evt 
+     */
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
 
         String gender = (String) cbGender.getSelectedItem();
@@ -215,9 +227,7 @@ public class RequestAccountCreation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRequestActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

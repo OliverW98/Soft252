@@ -83,10 +83,12 @@ public class PatientHome extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtAreaHistory.setColumns(20);
+        txtAreaHistory.setLineWrap(true);
         txtAreaHistory.setRows(5);
         jScrollPane4.setViewportView(txtAreaHistory);
 
         txtAreaPerscription.setColumns(20);
+        txtAreaPerscription.setLineWrap(true);
         txtAreaPerscription.setRows(5);
         jScrollPane5.setViewportView(txtAreaPerscription);
 
@@ -94,7 +96,7 @@ public class PatientHome extends javax.swing.JFrame {
 
         jLabel10.setText("Your Perscripton");
 
-        btnClose1.setText("Close");
+        btnClose1.setText("Log Out");
         btnClose1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose1ActionPerformed(evt);
@@ -174,12 +176,14 @@ public class PatientHome extends javax.swing.JFrame {
         jLabel4.setText("Select a Doctor :");
 
         txtAreaDoctorReviews.setColumns(20);
+        txtAreaDoctorReviews.setLineWrap(true);
         txtAreaDoctorReviews.setRows(5);
         jScrollPane2.setViewportView(txtAreaDoctorReviews);
 
         jLabel5.setText("Doctors Reviews");
 
         txtAreaDoctorWritenReview.setColumns(20);
+        txtAreaDoctorWritenReview.setLineWrap(true);
         txtAreaDoctorWritenReview.setRows(5);
         jScrollPane3.setViewportView(txtAreaDoctorWritenReview);
 
@@ -198,7 +202,7 @@ public class PatientHome extends javax.swing.JFrame {
 
         lblViewDoctorOutput.setText("jLabel8");
 
-        btnClose2.setText("Close");
+        btnClose2.setText("Log Out");
         btnClose2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose2ActionPerformed(evt);
@@ -275,6 +279,7 @@ public class PatientHome extends javax.swing.JFrame {
 
         txtAreaAppointments.setColumns(20);
         txtAreaAppointments.setFont(new java.awt.Font("Monospaced", 0, 10)); // NOI18N
+        txtAreaAppointments.setLineWrap(true);
         txtAreaAppointments.setRows(5);
         jScrollPane1.setViewportView(txtAreaAppointments);
 
@@ -303,7 +308,7 @@ public class PatientHome extends javax.swing.JFrame {
 
         jLabel8.setText(":");
 
-        btnClose3.setText("Close");
+        btnClose3.setText("Log Out");
         btnClose3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose3ActionPerformed(evt);
@@ -436,7 +441,7 @@ public class PatientHome extends javax.swing.JFrame {
     /**
      * get the name of the doctor from the comboBox and and search the hospital ArrayList 
      * for the doctor that matches the name.
-     * @param selectedDoctor 
+     * @param selectedDoctor a String of the Doctors name.
      */
     public void getCurrentDoctor(String selectedDoctor) {
         String DoctorName = selectedDoctor;

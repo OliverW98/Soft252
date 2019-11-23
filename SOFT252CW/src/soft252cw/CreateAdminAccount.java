@@ -14,10 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class CreateAdminAccount extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CreateAdminAccount
-     */
-     public Hospital hospital;
+    public Hospital hospital;
     
     public CreateAdminAccount(Hospital hospital) {
         initComponents();
@@ -69,7 +66,7 @@ public class CreateAdminAccount extends javax.swing.JFrame {
 
         lblSurname.setText("Surname :");
 
-        btnClose.setText("Close");
+        btnClose.setText("Log Out");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseActionPerformed(evt);
@@ -109,7 +106,7 @@ public class CreateAdminAccount extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap(326, Short.MAX_VALUE)
+                    .addContainerGap(314, Short.MAX_VALUE)
                     .addComponent(btnClose)
                     .addGap(15, 15, 15)))
         );
@@ -149,6 +146,17 @@ public class CreateAdminAccount extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Creates a admin account.
+     * <p>
+     * name , surname , password and address are all taken from the text boxes and
+     *  a random 4 digit number is created for the id. This is then used to create
+     *  a new admin account. The new account is then a added to the hospital ArrayList.
+     * the user is then redirected back to the login page where the id is shown to them 
+     * through a pop up.
+     * </P>
+     * @param evt 
+     */
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         Random rand = new Random();
         int id = rand.nextInt(9000) + 1000;
@@ -169,6 +177,10 @@ public class CreateAdminAccount extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
+    /**
+     * takes the user back to the login page and updates the hospital ArrayList.
+     * @param evt 
+     */
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
@@ -176,9 +188,7 @@ public class CreateAdminAccount extends javax.swing.JFrame {
         tempLogIn.updateHospital(hospital);
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

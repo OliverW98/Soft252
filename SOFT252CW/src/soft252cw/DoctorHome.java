@@ -34,11 +34,12 @@ public class DoctorHome extends javax.swing.JFrame {
 
         Calendar cal1 = Calendar.getInstance();
         cal1.set(2020, 5, 12, 13, 30, 0);
-        Appointment appointmen1 = new Appointment(cal1.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname(), true);
+        Date date = new Date();
+        Appointment appointmen1 = new Appointment(date, currentDoctor.getName() + " " + currentDoctor.getSurname(), true);
 
         Calendar cal2 = Calendar.getInstance();
         cal1.set(2020, 5, 13, 9, 30, 0);
-        Appointment appointmen2 = new Appointment(cal1.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname(), false);
+        Appointment appointmen2 = new Appointment(cal2.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname(), false);
 
         Patient pat1 = (Patient) hospital.people.get(5);
         pat1.setAppointment(appointmen1);
@@ -46,14 +47,15 @@ public class DoctorHome extends javax.swing.JFrame {
         Patient pat2 = (Patient) hospital.people.get(6);
         pat2.setAppointment(appointmen2);
 
-        currentPatient = (Patient) hospital.people.get(7); // figure out way to selcet patient.
         
         
+        lblCurrentPatient.setText("You currently don't have an appointment with a patient.");
         lblCreateMedicineOutput.setText("");
         lblAppointmentOutput.setText("");
         lblNotesOutput.setText("");
         lblPrescribeMedicineOutput.setText("");
         loadDoctorAppointments();
+        hasAppointment();
         displayPatientHistroy();
         loadMedicineNames();
     }
@@ -76,7 +78,27 @@ public class DoctorHome extends javax.swing.JFrame {
             }
         }
     }
+    
+    public void hasAppointment() {
+        String currentDoctorName = currentDoctor.getName() + " " + currentDoctor.getSurname();
+        Date date = new Date();
 
+        for (HospitalPerson person : hospital.people) {
+            if (person.getID().charAt(0) == 'P') {
+                Patient pat = (Patient) person;
+                for (int i = 0; i < pat.getAppointment().size(); i++) {
+                    if (pat.getAppointment().get(i).getDate().equals(date)
+                            && currentDoctorName.equals(pat.getAppointment().get(i).getDoctorName())
+                            && pat.getAppointment().get(i).isApprovesd() == true) {
+                        currentPatient = (Patient) person;
+                        lblCurrentPatient.setText("Current appointment patient : "
+                                +currentPatient.getName()+" "+currentPatient.getSurname());
+                    }
+                }
+            }
+        }
+    }
+    
     public void displayPatientHistroy() {
 
         Date date = new Date();
@@ -144,6 +166,7 @@ public class DoctorHome extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblAppointmentOutput = new javax.swing.JLabel();
+        lblCurrentPatient = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaAppointments = new javax.swing.JTextArea();
@@ -158,7 +181,7 @@ public class DoctorHome extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnClose1.setText("Close");
+        btnClose1.setText("Log Out");
         btnClose1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose1ActionPerformed(evt);
@@ -168,6 +191,7 @@ public class DoctorHome extends javax.swing.JFrame {
         jLabel2.setText("Make Notes :");
 
         txtAreaNotes.setColumns(20);
+        txtAreaNotes.setLineWrap(true);
         txtAreaNotes.setRows(5);
         jScrollPane2.setViewportView(txtAreaNotes);
 
@@ -200,6 +224,7 @@ public class DoctorHome extends javax.swing.JFrame {
         jLabel8.setText("Patient History :");
 
         txtAreaHistory.setColumns(20);
+        txtAreaHistory.setLineWrap(true);
         txtAreaHistory.setRows(5);
         jScrollPane3.setViewportView(txtAreaHistory);
 
@@ -230,17 +255,20 @@ public class DoctorHome extends javax.swing.JFrame {
 
         lblAppointmentOutput.setText("jLabel13");
 
+        lblCurrentPatient.setText("jLabel13");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(676, Short.MAX_VALUE)
+                .addContainerGap(664, Short.MAX_VALUE)
                 .addComponent(btnClose1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCurrentPatient)
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -299,7 +327,9 @@ public class DoctorHome extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap()
+                .addComponent(lblCurrentPatient)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
@@ -365,12 +395,13 @@ public class DoctorHome extends javax.swing.JFrame {
         jTabbedPane1.addTab("Current Appointment", jPanel1);
 
         txtAreaAppointments.setColumns(20);
+        txtAreaAppointments.setLineWrap(true);
         txtAreaAppointments.setRows(5);
         jScrollPane1.setViewportView(txtAreaAppointments);
 
         jLabel1.setText("Your Appointments");
 
-        btnClose2.setText("Close");
+        btnClose2.setText("Log Out");
         btnClose2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose2ActionPerformed(evt);
@@ -406,7 +437,7 @@ public class DoctorHome extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("View Appointments", jPanel2);
 
-        btnClose3.setText("Close");
+        btnClose3.setText("Log Out");
         btnClose3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose3ActionPerformed(evt);
@@ -429,7 +460,7 @@ public class DoctorHome extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(676, Short.MAX_VALUE)
+                .addContainerGap(664, Short.MAX_VALUE)
                 .addComponent(btnClose3)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -548,9 +579,7 @@ public class DoctorHome extends javax.swing.JFrame {
         tempLogIn.updateMedicineStock(medStock);
     }
     
-    /**
-     * @param args the command line arguments
-     */
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -588,6 +617,7 @@ public class DoctorHome extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAppointmentOutput;
     private javax.swing.JLabel lblCreateMedicineOutput;
+    private javax.swing.JLabel lblCurrentPatient;
     private javax.swing.JLabel lblNotesOutput;
     private javax.swing.JLabel lblPrescribeMedicineOutput;
     private javax.swing.JSpinner spinnerQuantity;

@@ -83,6 +83,7 @@ public class AdministratorHome extends javax.swing.JFrame {
         });
 
         txtAreaDoctorReviews.setColumns(20);
+        txtAreaDoctorReviews.setLineWrap(true);
         txtAreaDoctorReviews.setRows(5);
         jScrollPane1.setViewportView(txtAreaDoctorReviews);
 
@@ -91,6 +92,7 @@ public class AdministratorHome extends javax.swing.JFrame {
         jLabel13.setText("Feedback");
 
         txtAreaFeedback.setColumns(20);
+        txtAreaFeedback.setLineWrap(true);
         txtAreaFeedback.setRows(5);
         jScrollPane2.setViewportView(txtAreaFeedback);
 
@@ -101,7 +103,7 @@ public class AdministratorHome extends javax.swing.JFrame {
             }
         });
 
-        btnClose1.setText("Close");
+        btnClose1.setText("Log Out");
         btnClose1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose1ActionPerformed(evt);
@@ -207,7 +209,7 @@ public class AdministratorHome extends javax.swing.JFrame {
 
         lblRemoveOutput.setText("jLabel11");
 
-        btnClose2.setText("Close");
+        btnClose2.setText("Log Out");
         btnClose2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClose2ActionPerformed(evt);
@@ -461,9 +463,9 @@ public class AdministratorHome extends javax.swing.JFrame {
     }
 
     /**
-     * get the name of the doctor from the comboBox and and search the hospital ArrayList 
+     * get the name of the doctor from the passed in String and and search the hospital ArrayList 
      * for the doctor that matches the name.
-     * @param selectedDoctor 
+     * @param selectedDoctor a String of the doctors name.
      */
     public void getCurrentDoctor(String selectedDoctor) {
         String DoctorName = selectedDoctor;
@@ -479,9 +481,7 @@ public class AdministratorHome extends javax.swing.JFrame {
             }
         });
     }
-    /**
-     * @param args the command line arguments
-     */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPerson;
