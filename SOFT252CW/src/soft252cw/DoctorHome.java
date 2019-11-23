@@ -31,24 +31,6 @@ public class DoctorHome extends javax.swing.JFrame {
     }
 
     public void onLoad() {
-
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(2020, 5, 12, 13, 30, 0);
-        Date date = new Date();
-        Appointment appointmen1 = new Appointment(date, currentDoctor.getName() + " " + currentDoctor.getSurname(), true);
-
-        Calendar cal2 = Calendar.getInstance();
-        cal1.set(2020, 5, 13, 9, 30, 0);
-        Appointment appointmen2 = new Appointment(cal2.getTime(), currentDoctor.getName() + " " + currentDoctor.getSurname(), false);
-
-        Patient pat1 = (Patient) hospital.people.get(5);
-        pat1.setAppointment(appointmen1);
-
-        Patient pat2 = (Patient) hospital.people.get(6);
-        pat2.setAppointment(appointmen2);
-
-        
-        
         lblCurrentPatient.setText("You currently don't have an appointment with a patient.");
         lblCreateMedicineOutput.setText("");
         lblAppointmentOutput.setText("");
@@ -60,6 +42,13 @@ public class DoctorHome extends javax.swing.JFrame {
         loadMedicineNames();
     }
 
+    /**
+     * Loads the doctors future appointments
+     * <p>
+     * gets the current doctors name and checks each patient in the ArrayList
+     * who has an appointment with the current doctor which has been approved.
+     * </p>
+     */
     public void loadDoctorAppointments() {
         String currentDoctorName = currentDoctor.getName() + " " + currentDoctor.getSurname();
         Date date = new Date();
@@ -79,6 +68,14 @@ public class DoctorHome extends javax.swing.JFrame {
         }
     }
     
+     /**
+     * checks if the current Doctor is in an appointment
+     * <p>
+     * gets the current doctors name and checks each patient in the ArrayList
+     * who has an appointment with the current doctor at this current time 
+     * which has been approved.
+     * </p>
+     */
     public void hasAppointment() {
         String currentDoctorName = currentDoctor.getName() + " " + currentDoctor.getSurname();
         Date date = new Date();
@@ -99,6 +96,9 @@ public class DoctorHome extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * displays the current patient past appointments.
+     */
     public void displayPatientHistroy() {
 
         Date date = new Date();
@@ -112,12 +112,19 @@ public class DoctorHome extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * fills comboBoxes with the names of the medicines.
+     */
     public void loadMedicineNames() {
         for (Medicine med : medStock.medicine) {
             cbMedicineName.addItem(med.getName());
         }
     }
 
+    /**
+     * a name of a medicine is pasted in and search for in the ArrayList of Medicine.
+     * @param medicineName a String of the name of the medicine.
+     */
     public void getSelectedMedicine(String medicineName) {
         for (Medicine med : medStock.medicine) {
             if (cbMedicineName.getSelectedItem().toString().equals(medicineName)) {
@@ -520,6 +527,11 @@ public class DoctorHome extends javax.swing.JFrame {
         exitPage();
     }//GEN-LAST:event_btnClose3ActionPerformed
 
+    /**
+     * Creates a new medicine from the name entered into the text field and 
+     * adds it to the ArrayList of medicines.
+     * @param evt 
+     */
     private void btnCreateMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateMedicineActionPerformed
         
         if(!"".equals(txtMedicineName.getText())){
@@ -533,6 +545,16 @@ public class DoctorHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCreateMedicineActionPerformed
 
+    /**
+     * creates an appointment with a current patient
+     * <p>
+     * the year ,month , day , hour and minutes are taken from the comboBoxs and 
+     * a new calendar date is created. A new appointment is created with the calendar 
+     * date with the approved variable set to false.
+     * this appointment is then added to the current patient.
+     * </p>
+     * @param evt 
+     */
     private void btnRequestAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAppointmentActionPerformed
 
         int year = Integer.parseInt(cbRequestYear.getSelectedItem().toString());
@@ -550,11 +572,20 @@ public class DoctorHome extends javax.swing.JFrame {
         lblAppointmentOutput.setText("Appointment set.");
     }//GEN-LAST:event_btnRequestAppointmentActionPerformed
 
+    /**
+     * add the notes the doctor has made to the current patient.
+     * @param evt 
+     */
     private void btnPostNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostNotesActionPerformed
         currentPatient.setNotes(txtAreaNotes.getText());
         lblNotesOutput.setText("Notes have been saved");
     }//GEN-LAST:event_btnPostNotesActionPerformed
 
+    /**
+     * Creates a new prescription for the name and quantity entered and adds it
+     * to the current patient. the variable handedOut is set to false.
+     * @param evt 
+     */
     private void btnPrescribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrescribeActionPerformed
         if (!"".equals(txtDosage.getText())) {
             getSelectedMedicine(cbMedicineName.getSelectedItem().toString());
@@ -571,6 +602,10 @@ public class DoctorHome extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnPrescribeActionPerformed
 
+    /**
+     * close the current page and sends the updated hospital ArrayList
+     *  and updated medStock ArrayList to the log in page.
+     */
     public void exitPage() {
         this.setVisible(false);
         LogIn tempLogIn = new LogIn();
